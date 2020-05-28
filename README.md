@@ -1,1 +1,1 @@
-# Calorie Counting flutter application,
+# Calorie Counting flutter application.
