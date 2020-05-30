@@ -14,21 +14,21 @@ class OutOfPieChartState extends State<OutOfPieChart> {
 
   List<charts.Series> computeSeriesList() {
     final data = [
-      new Calories(
+      new BarHolder(
           0,
           min(this.filledBar, this.fullBar),
           charts.MaterialPalette.blue.shadeDefault),
-      new Calories(
+      new BarHolder(
           1,
           this.fullBar - min(this.filledBar, this.fullBar),
           charts.MaterialPalette.white),
     ];
     return [
-      new charts.Series<Calories, int>(
+      new charts.Series<BarHolder, int>(
         id: 'Calories',
-        domainFn: (Calories calories, _) => calories.fieldNumber,
-        measureFn: (Calories calories, _) => calories.calories,
-        colorFn: (Calories calories, _) => calories.color,
+        domainFn: (BarHolder calories, _) => calories.fieldNumber,
+        measureFn: (BarHolder calories, _) => calories.calories,
+        colorFn: (BarHolder calories, _) => calories.color,
         data: data,
       )
     ];
@@ -36,7 +36,7 @@ class OutOfPieChartState extends State<OutOfPieChart> {
 
   @override
   Widget build(BuildContext context) {
-    return charts.PieChart(
+    return new charts.PieChart(
         this.computeSeriesList(),
         animate: true,
         animationDuration: Duration(milliseconds: 500),
@@ -44,10 +44,10 @@ class OutOfPieChartState extends State<OutOfPieChart> {
   }
 }
 
-class Calories {
+class BarHolder {
   final int fieldNumber;
   final int calories;
   charts.Color color;
 
-  Calories(this.fieldNumber, this.calories, this.color);
+  BarHolder(this.fieldNumber, this.calories, this.color);
 }
