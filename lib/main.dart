@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
+import 'dashboard.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -98,8 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Place for Maria\'s circles:',
+            Expanded(
+              child: DashboardWrapper(),
             ),
           ],
           ),
@@ -110,6 +111,21 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Add dish',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class DashboardWrapper extends StatelessWidget {
+  final log = Logger('DashboardWrapper');
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {log.fine("DashboardWrapper tapped");},
+      child: Container(
+        color: Colors.redAccent,
+          child: Dashboard(),
+      ),
     );
   }
 }
