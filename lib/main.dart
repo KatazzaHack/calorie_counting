@@ -83,15 +83,15 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             FlatButton(
               onPressed: _decrementDate,
-              child: Text("<"),
+              child: Icon(Icons.chevron_left),
             ),
             Text(
-              'Date: ' + formatter.format(_dateTime),
-//              style: Theme.of(context).textTheme.headline4,
+              formatter.format(_dateTime),
+              style: Theme.of(context).textTheme.headline5,
             ),
             FlatButton(
               onPressed: _incrementDate,
-              child: Text(">"),
+              child: Icon(Icons.chevron_right),
             ),
           ],
         ),
