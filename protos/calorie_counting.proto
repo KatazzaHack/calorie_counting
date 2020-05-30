@@ -1,0 +1,41 @@
+// protoc --dart_out=./lib/gen ./protos/person.proto
+
+syntax = "proto3"
+
+option java_package = "com.katazzahack.calorie_counting";
+
+package com.katazzahack.calorie_counting.protos;
+
+// Product describes a base of a single Product.
+message Product {
+  string name = 1;
+  float fat = 2;
+  float protein = 3;
+  float carb = 3;
+  float calorie = 4;
+}
+
+// WeightedProduct describes prodcut with it used weight.
+message WeightedProduct {
+  Product product = 1;
+  float gramm = 2;
+}
+
+// Dish describes set of ingredients needed to create a specific dish.
+message Dish {
+  string name = 1;
+  repeated WeightedProduct ingredients = 2;
+}
+
+// MealEntite describes a meal, that person could eat.
+message MealEntity {
+  oneof meal {
+    Dish dish = 1;
+    WeightedProduct product = 2;
+  }
+}
+
+// Meals describes evrything that a person can eat at time.
+message Meals {
+  repeated MealEntity meals;
+}
