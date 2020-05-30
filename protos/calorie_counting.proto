@@ -1,6 +1,6 @@
 // protoc --dart_out=./lib/gen ./protos/person.proto
 
-syntax = "proto3"
+syntax = "proto3";
 
 option java_package = "com.katazzahack.calorie_counting";
 
@@ -11,8 +11,8 @@ message Product {
   string name = 1;
   float fat = 2;
   float protein = 3;
-  float carb = 3;
-  float calorie = 4;
+  float carb = 4;
+  float calorie = 5;
 }
 
 // WeightedProduct describes prodcut with it used weight.
@@ -37,5 +37,5 @@ message MealEntity {
 
 // Meals describes evrything that a person can eat at time.
 message Meals {
-  repeated MealEntity meals;
+  repeated MealEntity meals = 1;
 }
