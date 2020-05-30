@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(CalorieCountingApp());
@@ -43,6 +44,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   DateTime _dateTime = new DateTime.now();
   static const one_day = const Duration(days: 1);
+  var formatter = new DateFormat('dd/MM/yyyy');
 
   void _incrementDate() {
     setState(() {
@@ -72,10 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Date:',
+              'Date: ',
             ),
             Text(
-              '$_dateTime',
+              formatter.format(_dateTime),
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
