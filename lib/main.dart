@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:logging/logging.dart';
 
 void main() {
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    print('${record.level.name}: ${record.time}: ${record.message}');
+  });
+
   runApp(CalorieCountingApp());
 }
 
@@ -42,19 +48,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final log = Logger('_MyHomePageState');
+
   DateTime _dateTime = new DateTime.now();
   static const one_day = const Duration(days: 1);
   var formatter = new DateFormat('dd/MM/yyyy');
 
-  void _incrementDate() {
+  void _decrementDate() {
     setState(() {
-      _dateTime.add(one_day);
+      _dateTime = _dateTime.subtract(one_day);
     });
   }
 
-  void _decrementDate() {
+  void _incrementDate() {
     setState(() {
-      _dateTime.subtract(one_day);
+      _dateTime = _dateTime.add(one_day);
     });
   }
 
@@ -73,12 +81,17 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Date: ',
+            FlatButton(
+              onPressed: _decrementDate,
+              child: Text("<"),
             ),
             Text(
-              formatter.format(_dateTime),
-              style: Theme.of(context).textTheme.headline4,
+              'Date: ' + formatter.format(_dateTime),
+//              style: Theme.of(context).textTheme.headline4,
+            ),
+            FlatButton(
+              onPressed: _incrementDate,
+              child: Text(">"),
             ),
           ],
         ),
