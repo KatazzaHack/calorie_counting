@@ -1,14 +1,11 @@
 # Calorie Counting flutter application
 
-## Getting Started
+This project is currently being developed by 3 young and ambitious Software Engineers <br />
 
-This project is a starting point for a Flutter application.
+## Resources
 
-A few resources to get you started if this is your first Flutter project:
+Many thanks to: <br />
+* US Department of Agriculture, Agricultural Research Service. 2016. Nutrient Data Laboratory. USDA National Nutrient Database for Standard Reference, Release 28 (Slightly revised). Version Current: May 2016. [website](http://www.ars.usda.gov/nea/bhnrc/mafcl)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
