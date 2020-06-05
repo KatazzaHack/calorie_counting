@@ -15,6 +15,7 @@ class DashboardWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log.fine(dateTime.day.toString());
     return GestureDetector(
       onTap: onDashboardWrapperTap,
       behavior: HitTestBehavior.translucent,
