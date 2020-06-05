@@ -3,19 +3,104 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class Dashboard extends StatefulWidget {
+  final DateTime dateTime;
+  Dashboard({Key key, this.dateTime}) : super(key: key);
+
   @override
-  DashboardState createState() => DashboardState();
+  DashboardState createState() => DashboardState(
+      getStateForDay(this.dateTime),
+      getNormsForDay(this.dateTime)
+  );
 }
+
+class NutritionState {
+  final int proteins;
+  final int fats;
+  final int carbonates;
+  final int water;
+  final int calories;
+
+  NutritionState(
+      this.proteins,
+      this.fats,
+      this.carbonates,
+      this.water,
+      this.calories);
+}
+
+NutritionState getStateForDay(DateTime dateTime) {
+  return NutritionState(10, 20, 30, 100, 1000);
+}
+
+NutritionState getNormsForDay(DateTime dateTime) {
+  return NutritionState(20, 20, 50, 1000, 1500);
+}
+
 class DashboardState extends State<Dashboard>{
+  final NutritionState nutritionState;
+  final NutritionState nutritionNorms;
+
+  DashboardState(this.nutritionState, this.nutritionNorms);
+
+  Widget buildSmallWidget(double width, double height,
+      int filledBar, int fullBar, String name) {
+    return Container(
+      width: width,
+      height:height,
+      child: OutOfPieChart(
+        filledBar: filledBar,
+        fullBar: fullBar,
+        infoInside: false,
+        stringInside: name,
+      ),
+    );
+  }
+
+  Widget buildHugeWidget(double height, int filledBar, int fullBar) {
+    return Container(
+      height:height,
+      child: OutOfPieChart(
+        filledBar: filledBar,
+        fullBar: fullBar,
+        infoInside: true,
+        stringInside: "",
+      ),
+    );
+  }
+
   @override build(BuildContext context) {
+
     return Column(
             children: <Widget> [
-              Container(height:200, child:OutOfPieChart()),
+              buildHugeWidget(
+                  200,
+                  this.nutritionState.calories,
+                  this.nutritionNorms.calories),
               Row(children: <Widget>[
-                Container(width:MediaQuery.of(context).size.width / 4,height:100, child:OutOfPieChart()),
-                Container(width:MediaQuery.of(context).size.width / 4,height:100, child:OutOfPieChart()),
-                Container(width:MediaQuery.of(context).size.width / 4,height:100, child:OutOfPieChart()),
-                Container(width:MediaQuery.of(context).size.width / 4,height:100, child:OutOfPieChart()),
+                buildSmallWidget(
+                  MediaQuery.of(context).size.width / 4,
+                  100,
+                  this.nutritionState.proteins,
+                  this.nutritionNorms.proteins,
+                  "P",),
+                buildSmallWidget(
+                  MediaQuery.of(context).size.width / 4,
+                  100,
+                  this.nutritionState.fats,
+                  this.nutritionNorms.fats,
+                  "F",),
+                buildSmallWidget(
+                  MediaQuery.of(context).size.width / 4,
+                  100,
+                  this.nutritionState.carbonates,
+                  this.nutritionNorms.carbonates,
+                  "C",),
+                buildSmallWidget(
+                  MediaQuery.of(context).size.width / 4,
+                  100,
+                  this.nutritionState.water,
+                  this.nutritionNorms.water,
+                  "W",),
               ])
         ]
     );
@@ -23,18 +108,29 @@ class DashboardState extends State<Dashboard>{
 }
 
 class OutOfPieChart extends StatefulWidget {
-@override
-OutOfPieChartState createState() => OutOfPieChartState();
+  final int fullBar;
+  final int filledBar;
+  final bool infoInside ;
+  final String stringInside;
+
+  OutOfPieChart({
+    Key key, this.filledBar, this.fullBar, this.infoInside, this.stringInside})
+      : super(key: key);
+
+  @override
+  OutOfPieChartState createState() => OutOfPieChartState(
+      this.filledBar, this.fullBar, this.infoInside, this.stringInside);
+
 }
 
 class OutOfPieChartState extends State<OutOfPieChart> {
-  final int fullBar = 0;
-  final int filledBar = 0;
-  final int size = 100;
-  final bool infoInside = true;
-  final String stringInside = "F";
+  final int fullBar;
+  final int filledBar;
+  final bool infoInside ;
+  final String stringInside;
 
-  OutOfPieChartState();
+  OutOfPieChartState(
+      this.filledBar, this.fullBar, this.infoInside, this.stringInside);
 
   List<charts.Series> computeSeriesList() {
     int blueArc = min(this.filledBar, this.fullBar);
