@@ -25,4 +25,14 @@ class NormsHelper {
         }, where: 'name = "$norms.name"'
     );
   }
+
+  Future<Norms> getNorm(String name) async {
+    Database db = await _instance.database;
+    List<Map<String, dynamic>> result = await db.query(
+        tableName,
+        where: 'name = "$name"',
+        limit: 1
+    );
+    return Norms.fromJson(result[0]['data']);
+  }
 }
