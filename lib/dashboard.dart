@@ -8,7 +8,10 @@ class Dashboard extends StatefulWidget {
 }
 class DashboardState extends State<Dashboard>{
   @override build(BuildContext context) {
-    return Text("Maria's circles");
+    return new Container(
+      height: 200,
+      child: OutOfPieChart(),
+    );
   }
 }
 
@@ -46,7 +49,7 @@ class OutOfPieChartState extends State<OutOfPieChart> {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.PieChart(
+    return charts.PieChart(
         this.computeSeriesList(),
         animate: true,
         animationDuration: Duration(milliseconds: 500),

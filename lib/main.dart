@@ -130,9 +130,13 @@ class DashboardWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {log.fine("DashboardWrapper tapped");},
-      child: Container(
-        color: Colors.redAccent,
-          child: Dashboard(),
+      behavior: HitTestBehavior.translucent,
+      child: IgnorePointer(
+        ignoring: true,
+        child: Container(
+          color: Colors.redAccent,
+            child: Dashboard(),
+       ),
       ),
     );
   }
