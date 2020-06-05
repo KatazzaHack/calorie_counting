@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'home_page.dart';
 import 'database/ProductsHelper.dart';
+import 'statistics_page.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -68,6 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onPageChanged(PageType pageType) {
     // TODO: Handle page change.
+//    if (pageType == PageType.statistics) {
+//
+//    }
     log.fine("_onPageChanged, now page = " + pageType.toString());
   }
 
@@ -79,9 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Calorie Counting'),
       ),
-      body: HomePage(
-        onPageChanged: _onPageChanged,
-      ),
+//      body: HomePage(
+//        onPageChanged: _onPageChanged,
+//      ),
+      body: StatisticsPage(),
       floatingActionButton: FloatingActionButton(
         onPressed: () { _createDatabase(); },
         tooltip: 'Add dish',
