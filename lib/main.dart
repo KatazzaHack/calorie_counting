@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   DateTime _dateTime = new DateTime.now();
 
-  void _create_database() async {
+  void _createDatabase() async {
     final log = Logger('DashboardWrapper');
     log.fine("Start creating database");
     // final instance = DatabaseHelper.instance;
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {_create_database(); },
+        onPressed: () { _createDatabase(); },
         tooltip: 'Add dish',
         child: Icon(Icons.add),
       ),
