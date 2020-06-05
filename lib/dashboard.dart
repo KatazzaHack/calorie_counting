@@ -3,21 +3,38 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class Dashboard extends StatefulWidget {
+  final int filledBar;
+  final int fullBar;
+  Dashboard({Key key, this.filledBar, this.fullBar}) : super(key: key);
+
   @override
-  DashboardState createState() => DashboardState();
+  DashboardState createState() => DashboardState(this.filledBar, this.fullBar);
 }
 class DashboardState extends State<Dashboard>{
+  final int filledBar;
+  final int fullBar;
+
+  DashboardState(this.filledBar, this.fullBar);
+
   @override build(BuildContext context) {
     return new Container(
       height: 200,
-      child: OutOfPieChart(),
+      child: OutOfPieChart(
+          filledBar: this.filledBar,
+          fullBar: this.fullBar,
+      ),
     );
   }
 }
 
 class OutOfPieChart extends StatefulWidget {
-@override
-OutOfPieChartState createState() => OutOfPieChartState(1400, 1500);
+  final int filledBar;
+  final int fullBar;
+
+  OutOfPieChart({Key key, this.filledBar, this.fullBar}) : super(key: key);
+
+  @override
+  OutOfPieChartState createState() => OutOfPieChartState(filledBar, fullBar);
 }
 
 class OutOfPieChartState extends State<OutOfPieChart> {
