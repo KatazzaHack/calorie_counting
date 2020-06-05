@@ -111,9 +111,9 @@ class DashboardWrapper extends StatelessWidget {
         ignoring: true,
         child: Container(
           color: Colors.redAccent,
-            child: Dashboard(
-              dateTime: dateTime,
-            ),
+          child: Dashboard(
+            dateTime: dateTime,
+          ),
         ),
       ),
     );
