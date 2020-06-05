@@ -98,13 +98,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
           Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[ OutOfPieChart()
-            // Expanded(
-               //  flex:7,
-                // widthFactor: 0.7,
-                // heightFactor: 0.3,
-                // child: OutOfPieChart()
-            // ),
+          children: <Widget>[
+            Expanded(
+              child: DashboardWrapper(),
+            ),
           ],
           ),
         ],
@@ -114,6 +111,21 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Add dish',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class DashboardWrapper extends StatelessWidget {
+  final log = Logger('DashboardWrapper');
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {log.fine("DashboardWrapper tapped");},
+      child: Container(
+        color: Colors.redAccent,
+          child: Dashboard(),
+      ),
     );
   }
 }

@@ -2,6 +2,19 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+class Dashboard extends StatefulWidget {
+  @override
+  DashboardState createState() => DashboardState();
+}
+class DashboardState extends State<Dashboard>{
+  @override build(BuildContext context) {
+    return Container(
+        // width: 100,
+        height: 200,
+        child: OutOfPieChart());
+  }
+}
+
 class OutOfPieChart extends StatefulWidget {
 @override
 OutOfPieChartState createState() => OutOfPieChartState(1400, 1500);
@@ -36,7 +49,7 @@ class OutOfPieChartState extends State<OutOfPieChart> {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.PieChart(
+    return charts.PieChart(
         this.computeSeriesList(),
         animate: true,
         animationDuration: Duration(milliseconds: 500),
