@@ -15,10 +15,10 @@ message Product {
   float calorie = 5;
 }
 
-// WeightedProduct describes prodcut with it used weight.
+// WeightedProduct describes product with it used weight.
 message WeightedProduct {
   Product product = 1;
-  float gramm = 2;
+  float grams = 2;
 }
 
 // Dish describes set of ingredients needed to create a specific dish.
@@ -27,7 +27,7 @@ message Dish {
   repeated WeightedProduct ingredients = 2;
 }
 
-// MealEntite describes a meal, that person could eat.
+// MealEntity describes a meal, that person could eat.
 message MealEntity {
   oneof meal {
     Dish dish = 1;
@@ -35,7 +35,7 @@ message MealEntity {
   }
 }
 
-// Meals describes evrything that a person can eat at time.
-message Meals {
+// Meals describes everything that a person can eat at time.
+message Meal {
   repeated MealEntity meals = 1;
 }
