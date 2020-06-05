@@ -27,6 +27,18 @@ class ProductsHelper {
     });
   }
 
+  Future<List<Product>> searchBySubstring(String substring) async {
+    Database db = await _instance.database;
+    List<Map<String, dynamic>> result = await db.query(
+        tableName,
+        where: 'name LIKE "%$substring%"',
+        limit: 20
+    );
+    return List.generate(result.length, (i) {
+      return Product.fromJson(result[i]['data']);
+    });
+  }
+
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     Database db = await _instance.database;
     return await db.query(tableName);

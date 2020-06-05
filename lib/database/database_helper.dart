@@ -48,6 +48,21 @@ class DatabaseHelper {
           ''');
     await _addRusCal(db);
     await _addEngCal(db);
+    await _addNorm(db);
+  }
+
+  Future _addNorm(Database db) async {
+    Norms norms = Norms();
+    norms.name = "defaultUser";
+    norms.carbonates = 200;
+    norms.fats = 80;
+    norms.proteins = 140;
+    norms.calories = 2300;
+    norms.water = 3000;
+    db.insert("Norms", {
+      "name": norms.name,
+      "data": norms.writeToJson()
+    });
   }
 
   Future _addRusCal(Database db) async {
