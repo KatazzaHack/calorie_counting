@@ -145,7 +145,10 @@ class DashboardWrapper extends StatelessWidget {
         ignoring: true,
         child: Container(
           color: Colors.redAccent,
-            child: Dashboard(),
+            child: Dashboard(
+              filledBar: 6,
+              fullBar: 10,
+            ),
        ),
       ),
     );
