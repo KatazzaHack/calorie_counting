@@ -14,7 +14,7 @@ class Product extends $pb.GeneratedMessage {
     ..aOS(1, 'name')
     ..a<$core.double>(2, 'fat', $pb.PbFieldType.OF)
     ..a<$core.double>(3, 'protein', $pb.PbFieldType.OF)
-    ..a<$core.double>(4, 'carb', $pb.PbFieldType.OF)
+    ..a<$core.double>(4, 'carbonates', $pb.PbFieldType.OF)
     ..a<$core.double>(5, 'calorie', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
@@ -62,13 +62,13 @@ class Product extends $pb.GeneratedMessage {
   void clearProtein() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.double get carb => $_getN(3);
+  $core.double get carbonates => $_getN(3);
   @$pb.TagNumber(4)
-  set carb($core.double v) { $_setFloat(3, v); }
+  set carbonates($core.double v) { $_setFloat(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasCarb() => $_has(3);
+  $core.bool hasCarbonates() => $_has(3);
   @$pb.TagNumber(4)
-  void clearCarb() => clearField(4);
+  void clearCarbonates() => clearField(4);
 
   @$pb.TagNumber(5)
   $core.double get calorie => $_getN(4);
@@ -241,5 +241,86 @@ class Meal extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<MealEntity> get meals => $_getList(0);
+}
+
+class Norms extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Norms', package: const $pb.PackageName('com.katazzahack.calorie_counting.protos'), createEmptyInstance: create)
+    ..a<$core.double>(1, 'fats', $pb.PbFieldType.OF)
+    ..a<$core.double>(2, 'proteins', $pb.PbFieldType.OF)
+    ..a<$core.double>(3, 'carbonates', $pb.PbFieldType.OF)
+    ..a<$core.double>(4, 'water', $pb.PbFieldType.OF)
+    ..a<$core.double>(5, 'calories', $pb.PbFieldType.OF)
+    ..aOS(6, 'name')
+    ..hasRequiredFields = false
+  ;
+
+  Norms._() : super();
+  factory Norms() => create();
+  factory Norms.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Norms.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  Norms clone() => Norms()..mergeFromMessage(this);
+  Norms copyWith(void Function(Norms) updates) => super.copyWith((message) => updates(message as Norms));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Norms create() => Norms._();
+  Norms createEmptyInstance() => create();
+  static $pb.PbList<Norms> createRepeated() => $pb.PbList<Norms>();
+  @$core.pragma('dart2js:noInline')
+  static Norms getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Norms>(create);
+  static Norms _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.double get fats => $_getN(0);
+  @$pb.TagNumber(1)
+  set fats($core.double v) { $_setFloat(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFats() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFats() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get proteins => $_getN(1);
+  @$pb.TagNumber(2)
+  set proteins($core.double v) { $_setFloat(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProteins() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProteins() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get carbonates => $_getN(2);
+  @$pb.TagNumber(3)
+  set carbonates($core.double v) { $_setFloat(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCarbonates() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCarbonates() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get water => $_getN(3);
+  @$pb.TagNumber(4)
+  set water($core.double v) { $_setFloat(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasWater() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearWater() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get calories => $_getN(4);
+  @$pb.TagNumber(5)
+  set calories($core.double v) { $_setFloat(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasCalories() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCalories() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get name => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set name($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasName() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearName() => clearField(6);
 }
 
