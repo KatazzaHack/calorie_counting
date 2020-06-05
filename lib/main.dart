@@ -53,6 +53,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final log = Logger('_MyHomePageState');
 
+  DateTime _dateTime = new DateTime.now();
+
   void _create_database() async {
     final log = Logger('DashboardWrapper');
     log.fine("Start creating database");
@@ -61,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _onDateChanged(DateTime dateTime) {
-    // TODO: Add date change handling events.
+    _dateTime = dateTime;
     log.fine("_onDateChanged, now it is " + dateTime.day.toString());
   }
 
@@ -84,7 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              child: DashboardWrapper(),
+              child: DashboardWrapper(
+                dateTime: _dateTime,
+              ),
             ),
           ],
           ),
@@ -101,6 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class DashboardWrapper extends StatelessWidget {
   final log = Logger('DashboardWrapper');
+  final DateTime dateTime;
+
+  DashboardWrapper({Key key, this.dateTime}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +119,7 @@ class DashboardWrapper extends StatelessWidget {
         child: Container(
           color: Colors.redAccent,
             child: Dashboard(
-              dateTime: new DateTime.now(),
+              dateTime: dateTime,
             ),
         ),
       ),
