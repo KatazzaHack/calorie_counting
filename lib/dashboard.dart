@@ -49,7 +49,7 @@ class OutOfPieChartState extends State<OutOfPieChart> {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.PieChart(
+    return charts.PieChart(
         this.computeSeriesList(),
         animate: true,
         animationDuration: Duration(milliseconds: 500),
