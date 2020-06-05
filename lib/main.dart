@@ -1,4 +1,4 @@
-import 'package:calorie_counting/database_helper.dart';
+import 'package:calorie_counting/database/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'dashboard.dart';

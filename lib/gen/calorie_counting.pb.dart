@@ -250,6 +250,7 @@ class Norms extends $pb.GeneratedMessage {
     ..a<$core.double>(3, 'carbonates', $pb.PbFieldType.OF)
     ..a<$core.double>(4, 'water', $pb.PbFieldType.OF)
     ..a<$core.double>(5, 'calories', $pb.PbFieldType.OF)
+    ..aOS(6, 'name')
     ..hasRequiredFields = false
   ;
 
@@ -312,5 +313,14 @@ class Norms extends $pb.GeneratedMessage {
   $core.bool hasCalories() => $_has(4);
   @$pb.TagNumber(5)
   void clearCalories() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get name => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set name($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasName() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearName() => clearField(6);
 }
 

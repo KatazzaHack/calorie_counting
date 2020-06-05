@@ -47,5 +47,6 @@ message Norms {
   float carbonates = 3;
   float water = 4;
   float calories = 5;
+  string name = 6;
 }
 
