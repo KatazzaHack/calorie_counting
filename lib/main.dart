@@ -53,7 +53,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final log = Logger('_MyHomePageState');
 
-  void _create_database() async {
+  DateTime _dateTime = new DateTime.now();
+
+  void _createDatabase() async {
     final log = Logger('DashboardWrapper');
     log.fine("Start creating database");
     // final instance = DatabaseHelper.instance;
@@ -61,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _onDateChanged(DateTime dateTime) {
-    // TODO: Add date change handling events.
+    _dateTime = dateTime;
     log.fine("_onDateChanged, now it is " + dateTime.day.toString());
   }
 
@@ -70,9 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementDate method above.
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Calorie Counting'),
-        ),
+      appBar: AppBar(
+        title: const Text('Calorie Counting'),
+      ),
       body: Column(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -80,27 +82,25 @@ class _MyHomePageState extends State<MyHomePage> {
           DatePicker(
             onDateChanged: _onDateChanged,
           ),
-          Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: DashboardWrapper(),
-            ),
-          ],
+          DashboardWrapper(
+            dateTime: _dateTime,
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {_create_database(); },
+        onPressed: () { _createDatabase(); },
         tooltip: 'Add dish',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
 
 class DashboardWrapper extends StatelessWidget {
   final log = Logger('DashboardWrapper');
+  final DateTime dateTime;
+
+  DashboardWrapper({Key key, this.dateTime}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,9 +111,9 @@ class DashboardWrapper extends StatelessWidget {
         ignoring: true,
         child: Container(
           color: Colors.redAccent,
-            child: Dashboard(
-              dateTime: new DateTime.now(),
-            ),
+          child: Dashboard(
+            dateTime: dateTime,
+          ),
         ),
       ),
     );
