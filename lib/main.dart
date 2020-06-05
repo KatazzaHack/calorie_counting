@@ -1,3 +1,4 @@
+import 'package:calorie_counting/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
@@ -67,6 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _create_database() {
+    final log = Logger('DashboardWrapper');
+    log.fine("Start creating database");
+    final instance = DatabaseHelper.instance;
+    log.fine("Created database");
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -107,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {_create_database(); },
         tooltip: 'Add dish',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
