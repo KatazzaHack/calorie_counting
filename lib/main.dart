@@ -55,18 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _create_database() async {
     final log = Logger('DashboardWrapper');
-    log.fine("message");
-    var product = Product();
-    product.name = "яблоко";
-    product.carb = 100;
-    var pHelper = ProductsHelper();
-    pHelper.insert(product);
-    var ret = await pHelper.queryAllRows();
-    log.fine(" $ret ");
-    var ret2 = await pHelper.searchByPrefix("я");
-    log.fine("$ret2");
-    var ret3 = await pHelper.searchByPrefix("y");
-    log.fine("$ret3");
+    log.fine("Start creating database");
+    // final instance = DatabaseHelper.instance;
+    log.fine("Created database");
   }
 
   _onDateChanged(DateTime dateTime) {
@@ -121,10 +112,9 @@ class DashboardWrapper extends StatelessWidget {
         child: Container(
           color: Colors.redAccent,
             child: Dashboard(
-              filledBar: 9,
-              fullBar: 10,
+              dateTime: new DateTime.now(),
             ),
-       ),
+        ),
       ),
     );
   }
