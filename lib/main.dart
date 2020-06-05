@@ -98,13 +98,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
           Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-                flex:7,
+          children: <Widget>[ OutOfPieChart()
+            // Expanded(
+               //  flex:7,
                 // widthFactor: 0.7,
                 // heightFactor: 0.3,
-                child: OutOfPieChart()
-            ),
+                // child: OutOfPieChart()
+            // ),
           ],
           ),
         ],
