@@ -8,32 +8,49 @@ class Dashboard extends StatefulWidget {
 }
 class DashboardState extends State<Dashboard>{
   @override build(BuildContext context) {
-    return Container(
-        // width: 100,
-        height: 200,
-        child: OutOfPieChart());
+    return Column(
+            children: <Widget> [
+              Container(height:200, child:OutOfPieChart()),
+              Row(children: <Widget>[
+                Container(width:MediaQuery.of(context).size.width / 4,height:100, child:OutOfPieChart()),
+                Container(width:MediaQuery.of(context).size.width / 4,height:100, child:OutOfPieChart()),
+                Container(width:MediaQuery.of(context).size.width / 4,height:100, child:OutOfPieChart()),
+                Container(width:MediaQuery.of(context).size.width / 4,height:100, child:OutOfPieChart()),
+              ])
+        ]
+    );
   }
 }
 
 class OutOfPieChart extends StatefulWidget {
 @override
-OutOfPieChartState createState() => OutOfPieChartState(1400, 1500);
+OutOfPieChartState createState() => OutOfPieChartState();
 }
 
 class OutOfPieChartState extends State<OutOfPieChart> {
-  final int fullBar;
-  final int filledBar;
-  OutOfPieChartState(this.filledBar, this.fullBar);
+  final int fullBar = 0;
+  final int filledBar = 0;
+  final int size = 100;
+  final bool infoInside = true;
+  final String stringInside = "F";
+
+  OutOfPieChartState();
 
   List<charts.Series> computeSeriesList() {
+    int blueArc = min(this.filledBar, this.fullBar);
+    int whiteArc = this.fullBar - min(this.filledBar, this.fullBar);
+    if ((whiteArc == 0) && (blueArc == 0)) {
+      whiteArc = 0;
+      blueArc = 1;
+    }
     final data = [
       new BarHolder(
           0,
-          min(this.filledBar, this.fullBar),
+          blueArc,
           charts.MaterialPalette.blue.shadeDefault),
       new BarHolder(
           1,
-          this.fullBar - min(this.filledBar, this.fullBar),
+          whiteArc,
           charts.MaterialPalette.white),
     ];
     return [
@@ -49,11 +66,29 @@ class OutOfPieChartState extends State<OutOfPieChart> {
 
   @override
   Widget build(BuildContext context) {
-    return charts.PieChart(
-        this.computeSeriesList(),
-        animate: true,
-        animationDuration: Duration(milliseconds: 500),
-        defaultRenderer: new charts.ArcRendererConfig(arcWidth: 20));
+    return Stack(
+      children: <Widget>[
+        charts.PieChart(
+            this.computeSeriesList(),
+            animate: true,
+            animationDuration: Duration(milliseconds: 500),
+            defaultRenderer: new charts.ArcRendererConfig(
+                arcWidth: infoInside ? 10 : 8)),
+        Center(
+          child: Text(
+            infoInside? "$filledBar / $fullBar" : stringInside,
+            style: TextStyle(
+                fontSize: infoInside ? 20.0 : 15.0,
+                color: infoInside
+                    ? charts.ColorUtil.toDartColor(
+                    charts.MaterialPalette.blue.shadeDefault)
+                    : Colors.black,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        )
+      ],
+    );
   }
 }
 
