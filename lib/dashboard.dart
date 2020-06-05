@@ -8,7 +8,10 @@ class Dashboard extends StatefulWidget {
 }
 class DashboardState extends State<Dashboard>{
   @override build(BuildContext context) {
-    return Text("Maria's circles");
+    return new Container(
+      height: 200,
+      child: OutOfPieChart(),
+    );
   }
 }
 
