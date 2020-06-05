@@ -72,9 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementDate method above.
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Calorie Counting'),
-        ),
+      appBar: AppBar(
+        title: const Text('Calorie Counting'),
+      ),
       body: Column(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -82,15 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
           DatePicker(
             onDateChanged: _onDateChanged,
           ),
-          Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: DashboardWrapper(
-                dateTime: _dateTime,
-              ),
-            ),
-          ],
+          DashboardWrapper(
+            dateTime: _dateTime,
           ),
         ],
       ),
@@ -98,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {_create_database(); },
         tooltip: 'Add dish',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
