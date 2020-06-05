@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 import 'dashboard.dart';
+import 'gen/calorie_counting.pb.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -68,11 +69,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _create_database() {
+  void _create_database() async {
     final log = Logger('DashboardWrapper');
-    log.fine("Start creating database");
-    final instance = DatabaseHelper.instance;
-    log.fine("Created database");
+    log.fine("message");
+    var product = Product();
+    product.name = "яблоко";
+    product.carb = 100;
+    var pHelper = ProductsHelper();
+    pHelper.insert(product);
+    var ret = await pHelper.queryAllRows();
+    log.fine(" $ret ");
+    var ret2 = await pHelper.searchByPrefix("я");
+    log.fine("$ret2");
+    var ret3 = await pHelper.searchByPrefix("y");
+    log.fine("$ret3");
   }
 
   @override
