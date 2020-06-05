@@ -135,7 +135,7 @@ class DashboardWrapper extends StatelessWidget {
       child: IgnorePointer(
         ignoring: true,
         child: Container(
-          color: Colors.redAccent,
+          // color: Colors.redAccent,
             child: Dashboard(
               dateTime: new DateTime.now(),
             ),
