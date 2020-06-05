@@ -2,9 +2,37 @@ import 'dart:core';
 import 'dart:math';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'out_of_pie_chart.dart';
 
+class DashboardWrapper extends StatelessWidget {
+  final log = Logger('DashboardWrapper');
+  final DateTime dateTime;
+  final Function onDashboardWrapperTap;
+
+  DashboardWrapper({Key key, this.dateTime, this.onDashboardWrapperTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onDashboardWrapperTap,
+      behavior: HitTestBehavior.translucent,
+      child: IgnorePointer(
+        ignoring: true,
+        child: Container(
+          child: Dashboard(
+            dateTime: dateTime,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class Dashboard extends StatefulWidget {
+
+
   final DateTime dateTime;
   Dashboard({Key key, this.dateTime}) : super(key: key);
 
@@ -31,7 +59,14 @@ class NutritionState {
 }
 
 NutritionState getStateForDay(DateTime dateTime) {
-  return NutritionState(10, 20, 30, 100, 1000);
+  if (dateTime == null) {
+    dateTime = DateTime.now();
+  }
+  if (dateTime.day == DateTime.now().day) {
+    return NutritionState(10, 20, 30, 100, 1000);
+  } else {
+    return NutritionState(10, 20, 30, 100, 1300);
+  }
 }
 
 NutritionState getNormsForDay(DateTime dateTime) {

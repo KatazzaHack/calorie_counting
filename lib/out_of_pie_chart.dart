@@ -79,9 +79,11 @@ class OutOfPieChartState extends State<OutOfPieChart> {
         charts.PieChart(
           this.computeSeriesList(),
           animate: true,
-          animationDuration: Duration(milliseconds: 400),
+          animationDuration: Duration(milliseconds: 500),
           defaultRenderer: new charts.ArcRendererConfig(
-              arcWidth: (this.size * 0.15).round()),
+            arcWidth: (this.size * 0.15).round(),
+            strokeWidthPx: 0,
+          ),
           layoutConfig: new charts.LayoutConfig(
               leftMarginSpec: new charts.MarginSpec.fixedPixel(offset),
               topMarginSpec: new charts.MarginSpec.fixedPixel(offset),

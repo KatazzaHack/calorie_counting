@@ -1,34 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'date_picker.dart';
 import 'dashboard.dart';
-import 'package:logging/logging.dart';
 import 'main.dart';
 
-class DashboardWrapper extends StatelessWidget {
-  final log = Logger('DashboardWrapper');
-  final DateTime dateTime;
-  final Function onDashboardWrapperTap;
-
-  DashboardWrapper({Key key, this.dateTime, this.onDashboardWrapperTap})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onDashboardWrapperTap,
-      behavior: HitTestBehavior.translucent,
-      child: IgnorePointer(
-        ignoring: true,
-        child: Container(
-          color: Colors.redAccent,
-          child: Dashboard(
-            dateTime: dateTime,
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class HomePage extends StatefulWidget {
   final Function onPageChanged;
