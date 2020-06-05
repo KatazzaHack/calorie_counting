@@ -11,7 +11,7 @@ message Product {
   string name = 1;
   float fat = 2;
   float protein = 3;
-  float carb = 4;
+  float carbonates = 4;
   float calorie = 5;
 }
 
@@ -42,10 +42,10 @@ message Meal {
 
 // Store desired norms for the nutrition parameters.
 message Norms {
-  float fats = 2;
-  float proteins = 3;
-  float carbs = 4;
-  float water = 5;
-  float calories = 6;
+  float fats = 1;
+  float proteins = 2;
+  float carbonates = 3;
+  float water = 4;
+  float calories = 5;
 }
 

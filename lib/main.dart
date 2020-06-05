@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 import 'dashboard.dart';
+import 'gen/calorie_counting.pb.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -68,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _create_database() {
+  void _create_database() async {
     final log = Logger('DashboardWrapper');
     log.fine("Start creating database");
     // final instance = DatabaseHelper.instance;
