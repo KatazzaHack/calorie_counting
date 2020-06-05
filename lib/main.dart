@@ -1,9 +1,8 @@
 import 'package:calorie_counting/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'dashboard.dart';
-import 'date_picker.dart';
 import 'gen/calorie_counting.pb.dart';
+import 'home_page.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -41,6 +40,11 @@ class CalorieCountingApp extends StatelessWidget {
   }
 }
 
+enum PageType {
+  home,
+  statistics,
+}
+
 class MyHomePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -62,9 +66,9 @@ class _MyHomePageState extends State<MyHomePage> {
     log.fine("Created database");
   }
 
-  _onDateChanged(DateTime dateTime) {
-    _dateTime = dateTime;
-    log.fine("_onDateChanged, now it is " + dateTime.day.toString());
+  void _onPageChanged(PageType pageType) {
+    // TODO: Handle page change.
+    log.fine("_onPageChanged, now page = " + pageType.toString());
   }
 
   @override
@@ -75,46 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Calorie Counting'),
       ),
-      body: Column(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        children: <Widget> [
-          DatePicker(
-            onDateChanged: _onDateChanged,
-          ),
-          DashboardWrapper(
-            dateTime: _dateTime,
-          ),
-        ],
+      body: HomePage(
+        onPageChanged: _onPageChanged,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () { _createDatabase(); },
         tooltip: 'Add dish',
         child: Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class DashboardWrapper extends StatelessWidget {
-  final log = Logger('DashboardWrapper');
-  final DateTime dateTime;
-
-  DashboardWrapper({Key key, this.dateTime}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {log.fine("DashboardWrapper tapped");},
-      behavior: HitTestBehavior.translucent,
-      child: IgnorePointer(
-        ignoring: true,
-        child: Container(
-          color: Colors.redAccent,
-          child: Dashboard(
-            dateTime: dateTime,
-          ),
-        ),
       ),
     );
   }
