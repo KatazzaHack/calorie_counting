@@ -1,8 +1,8 @@
 import 'package:calorie_counting/database_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 import 'dashboard.dart';
+import 'date_picker.dart';
 import 'gen/calorie_counting.pb.dart';
 
 void main() {
@@ -53,27 +53,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final log = Logger('_MyHomePageState');
 
-  DateTime _dateTime = new DateTime.now();
-  static const one_day = const Duration(days: 1);
-  var formatter = new DateFormat('dd/MM/yyyy');
-
-  void _decrementDate() {
-    setState(() {
-      _dateTime = _dateTime.subtract(one_day);
-    });
-  }
-
-  void _incrementDate() {
-    setState(() {
-      _dateTime = _dateTime.add(one_day);
-    });
-  }
-
   void _create_database() async {
     final log = Logger('DashboardWrapper');
     log.fine("Start creating database");
     // final instance = DatabaseHelper.instance;
     log.fine("Created database");
+  }
+
+  _onDateChanged(DateTime dateTime) {
+    // TODO: Add date change handling events.
+    log.fine("_onDateChanged, now it is " + dateTime.day.toString());
   }
 
   @override
@@ -87,24 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        children: <Row> [
-          Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FlatButton(
-              onPressed: _decrementDate,
-              child: Icon(Icons.chevron_left),
-            ),
-            Text(
-              formatter.format(_dateTime),
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            FlatButton(
-              onPressed: _incrementDate,
-              child: Icon(Icons.chevron_right),
-            ),
-          ],
-        ),
+        children: <Widget> [
+          DatePicker(
+            onDateChanged: _onDateChanged,
+          ),
           Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -139,7 +114,7 @@ class DashboardWrapper extends StatelessWidget {
             child: Dashboard(
               dateTime: new DateTime.now(),
             ),
-       ),
+        ),
       ),
     );
   }
