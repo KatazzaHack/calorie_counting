@@ -1,6 +1,8 @@
+import 'dart:core';
+import 'dart:math';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'out_of_pie_chart.dart';
 
 class Dashboard extends StatefulWidget {
   final DateTime dateTime;
@@ -44,154 +46,86 @@ class DashboardState extends State<Dashboard>{
 
   Widget buildSmallWidget(double width, double height,
       int filledBar, int fullBar, String name) {
-    return Container(
-      width: width,
-      height:height,
-      child: OutOfPieChart(
-        filledBar: filledBar,
-        fullBar: fullBar,
-        infoInside: false,
-        stringInside: name,
-      ),
+    int fontSize = (0.125 * height).round();
+    return Column (
+      children: <Widget> [
+        Container(
+          // color: Colors.orange,
+          padding: EdgeInsets.all(0),
+          width: width,
+          height:height,
+          child: OutOfPieChart(
+            filledBar: filledBar,
+            fullBar: fullBar,
+            infoInside: false,
+            size: height,
+            stringInside: name,
+          ),
+        ),
+        Text(
+          filledBar.toString(),
+          style: TextStyle(
+              height: 1.0,
+              fontSize: height / 4,
+              fontWeight: FontWeight.bold,
+              color: Colors.black),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
+
   }
 
   Widget buildHugeWidget(double height, int filledBar, int fullBar) {
     return Container(
+      padding: EdgeInsets.all(0),
       height:height,
       child: OutOfPieChart(
         filledBar: filledBar,
         fullBar: fullBar,
         infoInside: true,
+        size: height,
         stringInside: "",
       ),
     );
   }
 
   @override build(BuildContext context) {
-
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Column(
-            children: <Widget> [
-              buildHugeWidget(
-                  200,
-                  this.nutritionState.calories,
-                  this.nutritionNorms.calories),
-              Row(children: <Widget>[
-                buildSmallWidget(
-                  MediaQuery.of(context).size.width / 4,
-                  100,
-                  this.nutritionState.proteins,
-                  this.nutritionNorms.proteins,
-                  "P",),
-                buildSmallWidget(
-                  MediaQuery.of(context).size.width / 4,
-                  100,
-                  this.nutritionState.fats,
-                  this.nutritionNorms.fats,
-                  "F",),
-                buildSmallWidget(
-                  MediaQuery.of(context).size.width / 4,
-                  100,
-                  this.nutritionState.carbonates,
-                  this.nutritionNorms.carbonates,
-                  "C",),
-                buildSmallWidget(
-                  MediaQuery.of(context).size.width / 4,
-                  100,
-                  this.nutritionState.water,
-                  this.nutritionNorms.water,
-                  "W",),
-              ])
+        children: <Widget> [
+          buildHugeWidget(
+              0.28 * height,
+              this.nutritionState.calories,
+              this.nutritionNorms.calories),
+          Row(children: <Widget>[
+            buildSmallWidget(
+              width / 4,
+              0.12 * height,
+              this.nutritionState.proteins,
+              this.nutritionNorms.proteins,
+              "P",),
+            buildSmallWidget(
+              width / 4,
+              0.12 * height,
+              this.nutritionState.fats,
+              this.nutritionNorms.fats,
+              "F",),
+            buildSmallWidget(
+              width / 4,
+              0.12 * height,
+              this.nutritionState.carbonates,
+              this.nutritionNorms.carbonates,
+              "C",),
+            buildSmallWidget(
+              width / 4,
+              0.12 * height,
+              this.nutritionState.water,
+              this.nutritionNorms.water,
+              "W",),
+          ])
         ]
     );
   }
-}
-
-class OutOfPieChart extends StatefulWidget {
-  final int fullBar;
-  final int filledBar;
-  final bool infoInside ;
-  final String stringInside;
-
-  OutOfPieChart({
-    Key key, this.filledBar, this.fullBar, this.infoInside, this.stringInside})
-      : super(key: key);
-
-  @override
-  OutOfPieChartState createState() => OutOfPieChartState(
-      this.filledBar, this.fullBar, this.infoInside, this.stringInside);
-
-}
-
-class OutOfPieChartState extends State<OutOfPieChart> {
-  final int fullBar;
-  final int filledBar;
-  final bool infoInside ;
-  final String stringInside;
-
-  OutOfPieChartState(
-      this.filledBar, this.fullBar, this.infoInside, this.stringInside);
-
-  List<charts.Series> computeSeriesList() {
-    int blueArc = min(this.filledBar, this.fullBar);
-    int whiteArc = this.fullBar - min(this.filledBar, this.fullBar);
-    if ((whiteArc == 0) && (blueArc == 0)) {
-      whiteArc = 0;
-      blueArc = 1;
-    }
-    final data = [
-      new BarHolder(
-          0,
-          blueArc,
-          charts.MaterialPalette.blue.shadeDefault),
-      new BarHolder(
-          1,
-          whiteArc,
-          charts.MaterialPalette.white),
-    ];
-    return [
-      new charts.Series<BarHolder, int>(
-        id: 'Calories',
-        domainFn: (BarHolder calories, _) => calories.fieldNumber,
-        measureFn: (BarHolder calories, _) => calories.calories,
-        colorFn: (BarHolder calories, _) => calories.color,
-        data: data,
-      )
-    ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        charts.PieChart(
-            this.computeSeriesList(),
-            animate: true,
-            animationDuration: Duration(milliseconds: 500),
-            defaultRenderer: new charts.ArcRendererConfig(
-                arcWidth: infoInside ? 10 : 8)),
-        Center(
-          child: Text(
-            infoInside? "$filledBar / $fullBar" : stringInside,
-            style: TextStyle(
-                fontSize: infoInside ? 20.0 : 15.0,
-                color: infoInside
-                    ? charts.ColorUtil.toDartColor(
-                    charts.MaterialPalette.blue.shadeDefault)
-                    : Colors.black,
-                fontWeight: FontWeight.bold
-            ),
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class BarHolder {
-  final int fieldNumber;
-  final int calories;
-  charts.Color color;
-
-  BarHolder(this.fieldNumber, this.calories, this.color);
 }
