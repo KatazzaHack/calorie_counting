@@ -1,14 +1,17 @@
 import 'dart:io';
+import 'dart:async';
 
+import 'package:calorie_counting/gen/calorie_counting.pb.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 
 
 class DatabaseHelper {
 
-  static final _databaseName = "calorie_test1.db";
+  static final _databaseName = "calorie_test3.db";
   static final _databaseVersion = 1;
 
   // make this a singleton class
@@ -43,5 +46,47 @@ class DatabaseHelper {
           CREATE TABLE Dishes ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, data BLOB);
           CREATE TABLE Norms ( _id INTEGER PRIMARY KEY, name TEXT, data BLOB);
           ''');
+    await _addRusCal(db);
+    await _addEngCal(db);
+  }
+
+  Future _addRusCal(Database db) async {
+    String rusCal = await rootBundle.loadString('assets/cal_rus.csv');
+    List data = rusCal.split('\n');
+    data.forEach((line) {
+      List row = line.split(';');
+      Product product = Product();
+      product.name = row[0].toLowerCase();
+      print(product.name);
+      product.protein = double.parse(row[1]);
+      product.carbonates = double.parse(row[3]);
+      product.calorie = double.parse(row[4]);
+      product.fat = double.parse(row[2]);
+      db.insert("Products",
+          {
+            "name": product.name,
+            "data": product.writeToJson()
+          }, conflictAlgorithm: ConflictAlgorithm.replace);
+    });
+  }
+
+  Future _addEngCal(Database db) async {
+    return;
+    String rusCal = await rootBundle.loadString('assets/new_cal_eng.csv');
+    List data = rusCal.split('\n');
+    data.forEach((line) {
+      List row = line.split(';');
+      Product product = Product();
+      product.name = row[0].toLowerCase();
+      product.protein = double.parse(row[2]);
+      product.carbonates = double.parse(row[4]);
+      product.calorie = double.parse(row[1]);
+      product.fat = double.parse(row[3]);
+      db.insert("Products",
+          {
+            "name": product.name,
+            "data": product.writeToJson()
+          }, conflictAlgorithm: ConflictAlgorithm.replace);
+    });
   }
 }
