@@ -83,7 +83,7 @@ class Product extends $pb.GeneratedMessage {
 class WeightedProduct extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('WeightedProduct', package: const $pb.PackageName('com.katazzahack.calorie_counting.protos'), createEmptyInstance: create)
     ..aOM<Product>(1, 'product', subBuilder: Product.create)
-    ..a<$core.double>(2, 'gramm', $pb.PbFieldType.OF)
+    ..a<$core.double>(2, 'grams', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
@@ -114,13 +114,13 @@ class WeightedProduct extends $pb.GeneratedMessage {
   Product ensureProduct() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.double get gramm => $_getN(1);
+  $core.double get grams => $_getN(1);
   @$pb.TagNumber(2)
-  set gramm($core.double v) { $_setFloat(1, v); }
+  set grams($core.double v) { $_setFloat(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasGramm() => $_has(1);
+  $core.bool hasGrams() => $_has(1);
   @$pb.TagNumber(2)
-  void clearGramm() => clearField(2);
+  void clearGrams() => clearField(2);
 }
 
 class Dish extends $pb.GeneratedMessage {
@@ -218,26 +218,26 @@ class MealEntity extends $pb.GeneratedMessage {
   WeightedProduct ensureProduct() => $_ensure(1);
 }
 
-class Meals extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Meals', package: const $pb.PackageName('com.katazzahack.calorie_counting.protos'), createEmptyInstance: create)
+class Meal extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Meal', package: const $pb.PackageName('com.katazzahack.calorie_counting.protos'), createEmptyInstance: create)
     ..pc<MealEntity>(1, 'meals', $pb.PbFieldType.PM, subBuilder: MealEntity.create)
     ..hasRequiredFields = false
   ;
 
-  Meals._() : super();
-  factory Meals() => create();
-  factory Meals.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Meals.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  Meals clone() => Meals()..mergeFromMessage(this);
-  Meals copyWith(void Function(Meals) updates) => super.copyWith((message) => updates(message as Meals));
+  Meal._() : super();
+  factory Meal() => create();
+  factory Meal.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Meal.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  Meal clone() => Meal()..mergeFromMessage(this);
+  Meal copyWith(void Function(Meal) updates) => super.copyWith((message) => updates(message as Meal));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static Meals create() => Meals._();
-  Meals createEmptyInstance() => create();
-  static $pb.PbList<Meals> createRepeated() => $pb.PbList<Meals>();
+  static Meal create() => Meal._();
+  Meal createEmptyInstance() => create();
+  static $pb.PbList<Meal> createRepeated() => $pb.PbList<Meal>();
   @$core.pragma('dart2js:noInline')
-  static Meals getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Meals>(create);
-  static Meals _defaultInstance;
+  static Meal getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Meal>(create);
+  static Meal _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<MealEntity> get meals => $_getList(0);
