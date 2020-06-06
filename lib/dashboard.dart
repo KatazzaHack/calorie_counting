@@ -41,15 +41,15 @@ class Dashboard extends StatelessWidget {
     return NutritionState(20, 20, 50, 1000, 1500);
   }
 
-  Widget buildSmallWidget(double width, double height,
-      int filledBar, int fullBar, String name) {
+  Widget buildSmallWidget(
+      double width, double height, int filledBar, int fullBar, String name) {
     int fontSize = (0.125 * height).round();
-    return Column (
-      children: <Widget> [
+    return Column(
+      children: <Widget>[
         Container(
           padding: EdgeInsets.all(0),
           width: width,
-          height:height,
+          height: height,
           child: OutOfPieChart(
             filledBar: filledBar,
             fullBar: fullBar,
@@ -69,13 +69,12 @@ class Dashboard extends StatelessWidget {
         ),
       ],
     );
-
   }
 
   Widget buildCaloriesWidget(double height, int filledBar, int fullBar) {
     return Container(
       padding: EdgeInsets.all(0),
-      height:height,
+      height: height,
       child: OutOfPieChart(
         filledBar: filledBar,
         fullBar: fullBar,

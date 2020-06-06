@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'home_page.dart';
-import 'database/ProductsHelper.dart';
+import 'database/products_helper.dart';
 import 'statistics_page.dart';
+import 'food_selection_page.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -57,38 +58,27 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final log = Logger('_MyHomePageState');
 
-  DateTime _dateTime = new DateTime.now();
-
-  void _createDatabase() async {
-    final log = Logger('DashboardWrapper');
-    log.fine("Start creating database");
-    ProductsHelper productHelper = ProductsHelper();
-    final foo = await productHelper.searchByPrefix("ябл");
-    log.fine("Created database $foo");
-  }
-
-  void _onPageChanged(PageType pageType) {
-    // TODO: Handle page change.
-//    if (pageType == PageType.statistics) {
-//
-//    }
-    log.fine("_onPageChanged, now page = " + pageType.toString());
+  void _onStatisticsPageRequest(PageType pageType) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => StatisticsPage())
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementDate method above.
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calorie Counting'),
       ),
-      body: HomePage(
-        onPageChanged: _onPageChanged,
-      ),
-      // body: StatisticsPage(),
+      body: HomePage(onStatisticsPageRequest: _onStatisticsPageRequest),
       floatingActionButton: FloatingActionButton(
-        onPressed: () { _createDatabase(); },
+          onPressed: () {
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => FoodSelectionPage()),
+          );
+        },
         tooltip: 'Add dish',
         child: Icon(Icons.add),
       ),

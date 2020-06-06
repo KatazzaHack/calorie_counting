@@ -2,7 +2,6 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-
 class OutOfPieChart extends StatelessWidget {
   final int fullBar;
   final int filledBar;
@@ -29,9 +28,7 @@ class OutOfPieChart extends StatelessWidget {
     }
     final data = [
       new BarHolder(
-          0,
-          blueArc,
-          charts.MaterialPalette.blue.shadeDefault.darker),
+          0, blueArc, charts.MaterialPalette.blue.shadeDefault.darker),
       new BarHolder(
           1,
           whiteArc,
@@ -69,15 +66,14 @@ class OutOfPieChart extends StatelessWidget {
         ),
         Center(
           child: Text(
-            infoInside? "$filledBar / $fullBar" : stringInside,
+            infoInside ? "$filledBar / $fullBar" : stringInside,
             style: TextStyle(
                 fontSize: infoInside ? this.size * 0.1 : offset * 2.0,
                 color: infoInside
                     ? charts.ColorUtil.toDartColor(
-                    charts.MaterialPalette.blue.shadeDefault)
+                        charts.MaterialPalette.blue.shadeDefault)
                     : Colors.black,
-                fontWeight: FontWeight.bold
-            ),
+                fontWeight: FontWeight.bold),
           ),
         )
       ],

@@ -8,20 +8,24 @@ class ProductsHelper {
 
   Future<int> insert(Product product) async {
     Database db = await _instance.database;
-    return await db.insert(tableName,
-        {
-          "name": product.name,
-          "data": product.writeToJson()
-        }, conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert(
+        tableName, {"name": product.name, "data": product.writeToJson()},
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<List<Product>> searchByPrefix(String prefix) async {
     Database db = await _instance.database;
-    List<Map<String, dynamic>> result = await db.query(
-        tableName,
-        where: 'name LIKE "$prefix%"',
-        limit: 20
-    );
+    List<Map<String, dynamic>> result =
+        await db.query(tableName, where: 'name LIKE "$prefix%"', limit: 20);
+    return List.generate(result.length, (i) {
+      return Product.fromJson(result[i]['data']);
+    });
+  }
+
+  Future<List<Product>> searchBySubstring(String substring) async {
+    Database db = await _instance.database;
+    List<Map<String, dynamic>> result =
+        await db.query(tableName, where: 'name LIKE "%$substring%"', limit: 20);
     return List.generate(result.length, (i) {
       return Product.fromJson(result[i]['data']);
     });
