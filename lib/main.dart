@@ -58,13 +58,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final log = Logger('_MyHomePageState');
 
-  DateTime _dateTime = new DateTime.now();
+  PageType _currentPageType = PageType.home;
 
   void _onPageChanged(PageType pageType) {
-    // TODO: Handle page change.
-//    if (pageType == PageType.statistics) {
-//
-//    }
+    setState(() {
+      _currentPageType = pageType;
+    });
     log.fine("_onPageChanged, now page = " + pageType.toString());
   }
 
@@ -76,19 +75,21 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Calorie Counting'),
       ),
-//      body: HomePage(
-//        onPageChanged: _onPageChanged,
-//      ),
-      body: StatisticsPage(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => FoodSelectionWrapper()),
-          );
-        },
-        tooltip: 'Add dish',
-        child: Icon(Icons.add),
+      body: _currentPageType == PageType.home ?
+        HomePage(onPageChanged: _onPageChanged)
+          : StatisticsPage(),
+        floatingActionButton: Visibility(
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FoodSelectionWrapper()),
+              );
+            },
+            tooltip: 'Add dish',
+            child: Icon(Icons.add),
+        ),
+        visible: _currentPageType == PageType.home, // set it to false
       ),
     );
   }
