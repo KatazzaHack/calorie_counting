@@ -58,7 +58,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final log = Logger('_MyHomePageState');
 
-  DateTime _dateTime = new DateTime.now();
+  PageType _currentPageType = PageType.home;
 
   void _createDatabase() async {
     final log = Logger('DashboardWrapper');
@@ -68,10 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onPageChanged(PageType pageType) {
-    // TODO: Handle page change.
-//    if (pageType == PageType.statistics) {
-//
-//    }
+    setState(() {
+      _currentPageType = pageType;
+    });
     log.fine("_onPageChanged, now page = " + pageType.toString());
   }
 
@@ -83,14 +82,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Calorie Counting'),
       ),
-//      body: HomePage(
-//        onPageChanged: _onPageChanged,
-//      ),
-      body: StatisticsPage(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () { _createDatabase(); },
-        tooltip: 'Add dish',
-        child: Icon(Icons.add),
+      body: _currentPageType == PageType.home ?
+        HomePage(onPageChanged: _onPageChanged)
+          : StatisticsPage(),
+      floatingActionButton: Visibility(
+        child: FloatingActionButton(
+          onPressed: () {
+            _createDatabase();
+          },
+          tooltip: 'Add dish',
+          child: Icon(Icons.add),
+        ),
+        visible: _currentPageType == PageType.home, // set it to false
       ),
     );
   }
