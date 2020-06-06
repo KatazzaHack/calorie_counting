@@ -33,6 +33,9 @@ class ListSearchState extends State<AddProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Product selection"),
+      ),
       body: Column(
         children: <Widget>[
           Padding(
