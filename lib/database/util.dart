@@ -12,8 +12,14 @@ Future<NutritionState> getStateForDay(DateTime dateTime) async {
   }
 }
 
-Future<List<NutritionState>> getStateForDaySpan(DateTime dateTime, int amount) async {
-  return Future.value(new List<NutritionState>());
+Future<List<NutritionState>> getStateForDaySpan (
+    DateTime dateTime, int amount) async {
+  List<NutritionState> result = new List<NutritionState>();
+  for (int i = 0; i < amount; ++i) {
+    DateTime current = dateTime.add(Duration(days:i));
+    result.add(await getStateForDay(current));
+  }
+  return Future.value(result);
 }
 
 Future<NutritionState> getNormsForDay(DateTime dateTime) async {

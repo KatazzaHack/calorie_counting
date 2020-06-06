@@ -6,25 +6,28 @@ import 'package:logging/logging.dart';
 import 'out_of_pie_chart.dart';
 import 'database/util.dart';
 import 'dart:collection';
+import 'package:charts_flutter/flutter.dart' as charts;
 
-class WeeklyStatisticsGraph extends StatelessWidget {
+class StatisticsGraph extends StatelessWidget {
   final log = Logger('StatisticsGraph');
   final DateTime firstDate;
-  HashMap stats;
+  final int days;
 
 
-  WeeklyStatisticsGraph({Key key, this.firstDate})
+  StatisticsGraph({Key key, this.firstDate, this.days})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<NutritionState>>(
-        future: getStateForDaySpan(firstDate, 7),
+        future: getStateForDaySpan(DateTime.now(), 7),
         builder: (context, AsyncSnapshot<List<NutritionState>> snapshot) {
           if (snapshot.hasData) {
             return  Container(
-                  child: Text("qwe"),
-                );
+              height: MediaQuery.of(context).size.height * 0.2,
+              width: MediaQuery.of(context).size.width,
+              child: getChart(snapshot.data),
+            );
           } else {
             return CircularProgressIndicator();
           }
@@ -32,97 +35,35 @@ class WeeklyStatisticsGraph extends StatelessWidget {
     );
   }
 
-//  Future<String> fetchStatistics() async {
-//    stats = new HashMap<int, int> = getStateForDaySpan(firstDate, 7);
-//    return Future.value("A");
-//  }
+  Widget getChart(List<NutritionState> data) {
 
-  Widget buildSmallWidget(
-      double width, double height, double filledBar, double fullBar,
-      String name) {
-    return Column(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(0),
-          width: width,
-          height: height,
-          child: OutOfPieChart(
-            filledBar: filledBar,
-            fullBar: fullBar,
-            infoInside: false,
-            size: height,
-            stringInside: name,
-          ),
+    List<CaloriesPerDay> dataSeries = new List<CaloriesPerDay>();
+    for (int i = 0; i < data.length; ++i) {
+      dataSeries.add(CaloriesPerDay(
+      i.toString(),
+      data[i].calories.round(),
+      charts.MaterialPalette.blue.shadeDefault));
+    }
+    var series = [new charts.Series<CaloriesPerDay, String>(
+          id: 'Calories',
+          domainFn: (CaloriesPerDay calories, _) => calories.date,
+          measureFn: (CaloriesPerDay calories, _) => calories.calories,
+          colorFn: (CaloriesPerDay calories, _) => calories.color,
+          data: dataSeries,
         ),
-        Text(
-          getRounded(filledBar),
-          style: TextStyle(
-              height: 1.0,
-              fontSize: height / 4,
-              fontWeight: FontWeight.bold,
-              color: Colors.black),
-          textAlign: TextAlign.center,
-        ),
-      ],
+    ];
+    return new charts.BarChart(
+      series,
+      animate: true,
     );
-  }
-
-  Widget buildCaloriesWidget(double height, double filledBar, double fullBar) {
-    return Container(
-      padding: EdgeInsets.all(0),
-      height: height,
-      child: OutOfPieChart(
-        filledBar: filledBar,
-        fullBar: fullBar,
-        infoInside: true,
-        size: height,
-        stringInside: "",
-      ),
-    );
-  }
-
-  Future<Widget> getDashboard(BuildContext context) async {
-    NutritionState nutritionState;
-    NutritionState nutritionNorms;
-    nutritionState = getStateForDay(this.dateTime);
-    nutritionNorms = await getNormsForDay(this.dateTime);
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return Future.value(Column(
-        children: <Widget> [
-          buildCaloriesWidget(
-              0.28 * height,
-              nutritionState.calories,
-              nutritionNorms.calories),
-          Row(children: <Widget>[
-            buildSmallWidget(
-              width / 4,
-              0.12 * height,
-              nutritionState.proteins,
-              nutritionNorms.proteins,
-              "P",),
-            buildSmallWidget(
-              width / 4,
-              0.12 * height,
-              nutritionState.fats,
-              nutritionNorms.fats,
-              "F",),
-            buildSmallWidget(
-              width / 4,
-              0.12 * height,
-              nutritionState.carbonates,
-              nutritionNorms.carbonates,
-              "C",),
-            buildSmallWidget(
-              width / 4,
-              0.12 * height,
-              nutritionState.water,
-              nutritionNorms.water,
-              "W",),
-          ])
-        ]
-    ));
   }
 }
 
 
+class CaloriesPerDay {
+  final String date;
+  final int calories;
+  charts.Color color;
+
+  CaloriesPerDay(this.date, this.calories, this.color);
+}
