@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class DatabaseHelper {
-  static final _databaseName = "calorie_test7.db";
+  static final _databaseName = "calorie_test9.db";
   static final _databaseVersion = 1;
 
   // make this a singleton class
@@ -36,12 +36,10 @@ class DatabaseHelper {
 
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
-    await db.execute('''
-          CREATE TABLE Products ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, data BLOB);
-          CREATE TABLE MealLog ( _id INTEGER PRIMARY KEY, timestamp INTEGER, data BLOB);
-          CREATE TABLE Dishes ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, data BLOB);
-          CREATE TABLE Norms ( _id INTEGER PRIMARY KEY, name TEXT, data BLOB);
-          ''');
+    await db.execute("CREATE TABLE Norms ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, data BLOB)");
+    await db.execute("CREATE TABLE Products ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, data BLOB)");
+    await db.execute("CREATE TABLE MealLog ( _id INTEGER PRIMARY KEY, timestamp INTEGER, data BLOB)");
+    await db.execute("CREATE TABLE Dishes ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, data BLOB)");
     await _addRusCal(db);
     await _addEngCal(db);
     await _addNorm(db);
