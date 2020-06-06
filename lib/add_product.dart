@@ -7,11 +7,8 @@ class AddProductPage extends StatefulWidget {
 }
 
 class ListSearchState extends State<AddProductPage> {
-
   ProductsHelper _productsHelper = ProductsHelper();
-
   TextEditingController _textController = TextEditingController();
-
 
   // Copy Main List into New List.
   static List<Product> newDataListS = initList();
@@ -32,11 +29,10 @@ class ListSearchState extends State<AddProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Product selection"),
-      ),
-      body: Column(
+    return Container(
+      color: Colors.black38,
+      height: MediaQuery.of(context).size.height * 0.8,
+      child: Column(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(12.0),
@@ -55,9 +51,10 @@ class ListSearchState extends State<AddProductPage> {
                 return ListTile(
                   title: Text(data.name),
                   onTap: ()=> print(data),);
-              }).toList(),
+                }
+              ).toList(),
             ),
-          )
+          ),
         ],
       ),
     );
