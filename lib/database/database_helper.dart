@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class DatabaseHelper {
-  static final _databaseName = "calorie_test3.db";
+  static final _databaseName = "calorie_test7.db";
   static final _databaseVersion = 1;
 
   // make this a singleton class
