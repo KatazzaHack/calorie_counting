@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'database/products_helper.dart';
 import 'gen/calorie_counting.pb.dart';
+import 'weighted_product.dart';
 
 class AddProductPage extends StatefulWidget {
   ListSearchState createState() => ListSearchState();
@@ -8,7 +9,6 @@ class AddProductPage extends StatefulWidget {
 
 class ListSearchState extends State<AddProductPage> {
   ProductsHelper _productsHelper = ProductsHelper();
-
   TextEditingController _textController = TextEditingController();
 
   // Copy Main List into New List.
@@ -32,11 +32,9 @@ class ListSearchState extends State<AddProductPage> {
       future: newDataList,
       builder: (context, AsyncSnapshot<List<Product>> snapshot) {
         if (snapshot.hasData) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("Product selection"),
-            ),
-            body: Column(
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Column(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(12.0),
@@ -54,7 +52,14 @@ class ListSearchState extends State<AddProductPage> {
                     children: snapshot.data.map((data) {
                       return ListTile(
                         title: Text(data.name),
-                        onTap: () => print(data),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    WeightedProductPage(product: data)),
+                          );
+                        },
                       );
                     }).toList(),
                   ),

@@ -10,20 +10,25 @@ class DateMonthPicker extends StatefulWidget {
 }
 
 class DateMonthPickerState extends State<DateMonthPicker> {
-  int _month = new DateTime.now().month;
+  static DateTime _timeNow = DateTime.now();
+  DateTime _monthStart = DateTime.now().subtract(Duration(days: _timeNow.day - 1));
   var formatter = new DateFormat('MMMM');
 
   void _decrementMonth() {
     setState(() {
-      _month = ((_month + 12) - 1) % 12;
-      widget.onMonthChanged(_month);
+      // Getting previous month first.
+      _monthStart = _monthStart.subtract(Duration(days: 1));
+      _monthStart = _monthStart.subtract(Duration(days: _monthStart.day - 1));
+      widget.onMonthChanged(_monthStart);
     });
   }
 
   void _incrementMonth() {
     setState(() {
-      _month = (_month + 1) % 12;
-      widget.onMonthChanged(_month);
+      // Getting next month first.
+      _monthStart = _monthStart.add(Duration(days: 31));
+      _monthStart = _monthStart.subtract(Duration(days: _monthStart.day - 1));
+      widget.onMonthChanged(_monthStart);
     });
   }
 
@@ -39,7 +44,7 @@ class DateMonthPickerState extends State<DateMonthPicker> {
         ),
         Text(
           // 0 for year as it doesn't matter, bacause we want to show month.
-          formatter.format(new DateTime(0, _month)),
+          formatter.format(_monthStart),
           style: Theme.of(context).textTheme.headline5,
         ),
         Expanded(
