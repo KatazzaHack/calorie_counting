@@ -6,8 +6,8 @@ import 'pickers/date_month_picker.dart';
 class MonthlyStatistics extends StatelessWidget {
   var log = Logger("MonthlyStatistics");
 
-  void _onMonthChanged(int month) {
-    log.fine("_onMonthChanged, now month = " + month.toString());
+  void _onMonthChanged(DateTime startMonth) {
+    log.fine("_onMonthChanged, now month = " + startMonth.month.toString());
   }
 
   @override
