@@ -16,7 +16,7 @@ class ProductsHelper {
   Future<List<Product>> searchByPrefix(String prefix) async {
     Database db = await _instance.database;
     List<Map<String, dynamic>> result =
-        await db.query(tableName, where: 'name LIKE "$prefix%"', limit: 20);
+        await db.query(tableName, where: 'name LIKE LOWER("$prefix%")', limit: 20);
     return List.generate(result.length, (i) {
       return Product.fromJson(result[i]['data']);
     });
@@ -25,7 +25,7 @@ class ProductsHelper {
   Future<List<Product>> searchBySubstring(String substring) async {
     Database db = await _instance.database;
     List<Map<String, dynamic>> result =
-        await db.query(tableName, where: 'name LIKE "%$substring%"', limit: 20);
+        await db.query(tableName, where: 'name LIKE LOWER("%$substring%")');
     return List.generate(result.length, (i) {
       return Product.fromJson(result[i]['data']);
     });
