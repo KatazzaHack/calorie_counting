@@ -12,12 +12,15 @@ class ListSearchState extends State<AddProductPage> {
 
   TextEditingController _textController = TextEditingController();
 
-  // Copy Main List into New List.
-  List<Product> newDataList = _initialize();
 
-  List<Product> _initialize(){
-    List<Product> searchResult = _productsHelper.searchBySubstring("а");
-    return searchResult;
+  // Copy Main List into New List.
+  static List<Product> newDataListS = initList();
+  List<Product> newDataList = newDataListS;
+
+  static List<Product> initList() {
+    Product p = Product();
+    p.name = "anton";
+    return [p];
   }
 
   onItemChanged(String value) async {
