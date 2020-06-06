@@ -11,52 +11,87 @@ class ListSearchState extends State<AddProductPage> {
   TextEditingController _textController = TextEditingController();
 
   // Copy Main List into New List.
-  static List<Product> newDataListS = initList();
-  List<Product> newDataList = newDataListS;
+  Future<List<Product>> newDataList;
 
-  static List<Product> initList() {
-    Product p = Product();
-    p.name = "anton";
-    return [p];
+  @override
+  void initState() {
+    super.initState();
+    newDataList = _productsHelper.searchBySubstring("");
   }
 
   onItemChanged(String value) async {
-    List<Product> searchResult = await _productsHelper.searchBySubstring(value);
     setState(() {
-      newDataList = searchResult;
+      newDataList = _productsHelper.searchBySubstring(value);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black38,
-      height: MediaQuery.of(context).size.height * 0.8,
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                hintText: 'Search Product...',
-              ),
-              onChanged: onItemChanged,
+//    return Container(
+//      color: Colors.black38,
+//      height: MediaQuery.of(context).size.height * 0.8,
+//      child: Column(
+//        children: <Widget>[
+//          Padding(
+//            padding: const EdgeInsets.all(12.0),
+//            child: TextField(
+//              controller: _textController,
+//              decoration: InputDecoration(
+//                hintText: 'Search Product...',
+//              ),
+//              onChanged: onItemChanged,
+//            ),
+//          ),
+//          Expanded(
+//            child: ListView(
+//              padding: EdgeInsets.all(12.0),
+//              children: newDataList.map((data) {
+//                return ListTile(
+//                  title: Text(data.name),
+//                  onTap: ()=> print(data),);
+//                }
+//              ).toList(),
+//            ),
+//          ),
+//        ],
+//      ),
+    return FutureBuilder<List<Product>>(
+      future: newDataList,
+      builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+        if (snapshot.hasData) {
+          return Container(
+            color: Colors.black38,
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextField(
+                    controller: _textController,
+                    decoration: InputDecoration(
+                      hintText: 'Search Product...',
+                    ),
+                    onChanged: onItemChanged,
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    padding: EdgeInsets.all(12.0),
+                    children: snapshot.data.map((data) {
+                      return ListTile(
+                        title: Text(data.name),
+                        onTap: () => print(data),
+                      );
+                    }).toList(),
+                  ),
+                )
+              ],
             ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.all(12.0),
-              children: newDataList.map((data) {
-                return ListTile(
-                  title: Text(data.name),
-                  onTap: ()=> print(data),);
-                }
-              ).toList(),
-            ),
-          ),
-        ],
-      ),
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 }

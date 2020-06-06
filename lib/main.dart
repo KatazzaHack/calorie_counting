@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
             MaterialPageRoute(builder: (context) => FoodSelectionPage()),
           );
         },
-        tooltip: 'Add dish',
+        tooltip: 'Add meal',
         child: Icon(Icons.add),
       ),
     );

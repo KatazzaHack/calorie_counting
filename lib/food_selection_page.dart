@@ -6,29 +6,39 @@ class FoodSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Food selection"),
+        title: Text("Add meal"),
       ),
-      body: Center(
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            RaisedButton(
-              child: new Text("Add product"),
-              color: Colors.blue,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddProductPage()),
-                );
-              },
+      body: Column(
+        children: <Widget>[
+          AddProductPage(),
+          Expanded(
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: RaisedButton(
+                      child: new Text("Add new dish"),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AddProductPage()),
+                        );
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child:
+                    RaisedButton(
+                      child: new Text("Add new product"),
+                      onPressed: null,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            RaisedButton(
-              child: new Text("Add dish"),
-              color: Colors.yellow,
-              onPressed: null,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
