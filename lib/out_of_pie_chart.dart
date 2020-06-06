@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 
-class OutOfPieChart extends StatefulWidget {
+class OutOfPieChart extends StatelessWidget {
   final int fullBar;
   final int filledBar;
   final bool infoInside;
@@ -19,29 +19,6 @@ class OutOfPieChart extends StatefulWidget {
     this.stringInside})
       : super(key: key);
 
-  @override
-  OutOfPieChartState createState() => OutOfPieChartState(
-      this.filledBar,
-      this.fullBar,
-      this.infoInside,
-      this.size,
-      this.stringInside);
-
-}
-
-class OutOfPieChartState extends State<OutOfPieChart> {
-  final int fullBar;
-  final int filledBar;
-  final bool infoInside;
-  final double size;
-  final String stringInside;
-
-  OutOfPieChartState(
-      this.filledBar,
-      this.fullBar,
-      this.infoInside,
-      this.size,
-      this.stringInside);
 
   List<charts.Series> computeSeriesList() {
     int blueArc = min(this.filledBar, this.fullBar);
@@ -58,7 +35,7 @@ class OutOfPieChartState extends State<OutOfPieChart> {
       new BarHolder(
           1,
           whiteArc,
-          charts.MaterialPalette.blue.shadeDefault.lighter.lighter.lighter.lighter),
+          charts.MaterialPalette.blue.shadeDefault.lighter.lighter.lighter),
     ];
     return [
       new charts.Series<BarHolder, int>(

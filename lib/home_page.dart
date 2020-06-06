@@ -15,18 +15,21 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   final log = Logger("HomePageState");
-  DateTime _dateTime;
+  DateTime _dateTime = DateTime.now();
 
   void _onDateChanged(DateTime dateTime) {
-    _dateTime = dateTime;
+    setState(() {
+      _dateTime = dateTime;
+    });
     log.fine("_onDateChanged, now it is " + dateTime.day.toString());
   }
 
-  void _onDashboardWrapperTapped() {
+  void _onDashboardTapped() {
     widget.onPageChanged(PageType.statistics);
   }
 
   @override Widget build(BuildContext context) {
+    log.fine("build, now it is " + this._dateTime.day.toString());
     return Column(
       // Center is a layout widget. It takes a single child and positions it
       // in the middle of the parent.
@@ -34,9 +37,9 @@ class HomePageState extends State<HomePage> {
         DatePicker(
           onDateChanged: _onDateChanged,
         ),
-        DashboardWrapper(
+        Dashboard(
           dateTime: _dateTime,
-          onDashboardWrapperTap: _onDashboardWrapperTapped,
+          onDashboardTap: _onDashboardTapped,
         ),
       ],
     );

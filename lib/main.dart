@@ -83,10 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Calorie Counting'),
       ),
-//      body: HomePage(
-//        onPageChanged: _onPageChanged,
-//      ),
-      body: StatisticsPage(),
+      body: HomePage(
+        onPageChanged: _onPageChanged,
+      ),
+      // body: StatisticsPage(),
       floatingActionButton: FloatingActionButton(
         onPressed: () { _createDatabase(); },
         tooltip: 'Add dish',
