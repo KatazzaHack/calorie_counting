@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'date_week_picker.dart';
-import 'date_month_picker.dart';
+import 'package:calorie_counting/pickers/date_week_picker.dart';
+import 'package:calorie_counting/pickers/date_month_picker.dart';
 import 'package:logging/logging.dart';
 
 class MonthlyStatistics extends StatelessWidget {
@@ -18,7 +18,8 @@ class MonthlyStatistics extends StatelessWidget {
           onMonthChanged: _onMonthChanged,
         ),
         Center(
-          child: Text("Monthly Statistics", style: const TextStyle(fontSize: 36)),
+          child: Text("Monthly Statistics",
+              style: const TextStyle(fontSize: 36)),
         ),
       ],
     );
@@ -40,7 +41,8 @@ class WeeklyStatistics extends StatelessWidget {
           onWeekChanged: _onWeekChanged,
         ),
         Center(
-          child: Text("Weekly Statistics", style: const TextStyle(fontSize: 36)),
+          child: Text("Weekly Statistics",
+              style: const TextStyle(fontSize: 36)),
         ),
       ],
     );
