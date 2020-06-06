@@ -9,30 +9,22 @@ class NormsHelper {
 
   Future<int> insert(Norms norms) async {
     Database db = await _instance.database;
-    return await db.insert(tableName,
-        {
-          "name": norms.name,
-          "data": norms.writeToJson()
-        }, conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert(
+        tableName, {"name": norms.name, "data": norms.writeToJson()},
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<int> update(Norms norms) async {
     Database db = await _instance.database;
-    return await db.update(tableName,
-        {
-          "name": norms.name,
-          "data": norms.writeToJson()
-        }, where: 'name = "$norms.name"'
-    );
+    return await db.update(
+        tableName, {"name": norms.name, "data": norms.writeToJson()},
+        where: 'name = "$norms.name"');
   }
 
   Future<Norms> getNorm(String name) async {
     Database db = await _instance.database;
-    List<Map<String, dynamic>> result = await db.query(
-        tableName,
-        where: 'name = "$name"',
-        limit: 1
-    );
+    List<Map<String, dynamic>> result =
+        await db.query(tableName, where: 'name = "$name"', limit: 1);
     return Norms.fromJson(result[0]['data']);
   }
 }

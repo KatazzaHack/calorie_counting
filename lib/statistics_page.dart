@@ -34,7 +34,8 @@ class WeeklyStatistics extends StatelessWidget {
 }
 
 class StatisticsPage extends StatefulWidget {
-  @override StatisticsPageState createState() => StatisticsPageState();
+  @override
+  StatisticsPageState createState() => StatisticsPageState();
 }
 
 class StatisticsPageState extends State<StatisticsPage> {

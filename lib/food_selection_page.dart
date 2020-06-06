@@ -14,7 +14,7 @@ class FoodSelectionPage extends StatelessWidget {
           children: <Widget>[
             RaisedButton(
               child: new Text("Add product"),
-              color:  Colors.blue,
+              color: Colors.blue,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -24,7 +24,7 @@ class FoodSelectionPage extends StatelessWidget {
             ),
             RaisedButton(
               child: new Text("Add dish"),
-              color:  Colors.yellow,
+              color: Colors.yellow,
               onPressed: null,
             ),
           ],

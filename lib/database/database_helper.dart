@@ -7,10 +7,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-
-
 class DatabaseHelper {
-
   static final _databaseName = "calorie_test3.db";
   static final _databaseVersion = 1;
 
@@ -34,8 +31,7 @@ class DatabaseHelper {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, _databaseName);
     return await openDatabase(path,
-        version: _databaseVersion,
-        onCreate: _onCreate);
+        version: _databaseVersion, onCreate: _onCreate);
   }
 
   // SQL code to create the database table
@@ -59,10 +55,7 @@ class DatabaseHelper {
     norms.proteins = 140;
     norms.calories = 2300;
     norms.water = 3000;
-    db.insert("Norms", {
-      "name": norms.name,
-      "data": norms.writeToJson()
-    });
+    db.insert("Norms", {"name": norms.name, "data": norms.writeToJson()});
   }
 
   Future _addRusCal(Database db) async {
@@ -77,11 +70,9 @@ class DatabaseHelper {
       product.carbonates = double.parse(row[3]);
       product.calorie = double.parse(row[4]);
       product.fat = double.parse(row[2]);
-      db.insert("Products",
-          {
-            "name": product.name,
-            "data": product.writeToJson()
-          }, conflictAlgorithm: ConflictAlgorithm.replace);
+      db.insert(
+          "Products", {"name": product.name, "data": product.writeToJson()},
+          conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 
@@ -97,11 +88,9 @@ class DatabaseHelper {
       product.carbonates = double.parse(row[4]);
       product.calorie = double.parse(row[1]);
       product.fat = double.parse(row[3]);
-      db.insert("Products",
-          {
-            "name": product.name,
-            "data": product.writeToJson()
-          }, conflictAlgorithm: ConflictAlgorithm.replace);
+      db.insert(
+          "Products", {"name": product.name, "data": product.writeToJson()},
+          conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 }
