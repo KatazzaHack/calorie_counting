@@ -1,8 +1,7 @@
-import 'package:calorie_counting/database/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'gen/calorie_counting.pb.dart';
 import 'home_page.dart';
+import 'database/ProductsHelper.dart';
 import 'statistics_page.dart';
 
 void main() {
@@ -63,8 +62,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void _createDatabase() async {
     final log = Logger('DashboardWrapper');
     log.fine("Start creating database");
-    // final instance = DatabaseHelper.instance;
-    log.fine("Created database");
+    ProductsHelper productHelper = ProductsHelper();
+    final foo = await productHelper.searchByPrefix("ябл");
+    log.fine("Created database $foo");
   }
 
   void _onPageChanged(PageType pageType) {
