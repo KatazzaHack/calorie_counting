@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class OutOfPieChart extends StatelessWidget {
-  final int fullBar;
-  final int filledBar;
+  final double fullBar;
+  final double filledBar;
   final bool infoInside;
   final double size;
   final String stringInside;
@@ -20,8 +20,8 @@ class OutOfPieChart extends StatelessWidget {
 
 
   List<charts.Series> computeSeriesList() {
-    int blueArc = min(this.filledBar, this.fullBar);
-    int whiteArc = this.fullBar - min(this.filledBar, this.fullBar);
+    int blueArc = min(this.filledBar, this.fullBar).round();
+    int whiteArc = (this.fullBar - min(this.filledBar, this.fullBar)).round();
     if ((whiteArc == 0) && (blueArc == 0)) {
       whiteArc = 0;
       blueArc = 1;
@@ -66,7 +66,10 @@ class OutOfPieChart extends StatelessWidget {
         ),
         Center(
           child: Text(
-            infoInside ? "$filledBar / $fullBar" : stringInside,
+            infoInside
+                ? getRounded(filledBar) + "/"
+                + getRounded(fullBar)
+                : stringInside,
             style: TextStyle(
                 fontSize: infoInside ? this.size * 0.1 : offset * 2.0,
                 color: infoInside
@@ -79,6 +82,16 @@ class OutOfPieChart extends StatelessWidget {
       ],
     );
   }
+}
+
+// Rounds the number up to 1 digit or outputs it as int
+String getRounded(double value) {
+  int value10x = (value * 10).round();
+  String valueToShow = (value10x ~/ 10).toString();
+  if (value10x % 10 != 0) {
+    valueToShow += "." + (value10x % 10).toString();
+  }
+  return valueToShow;
 }
 
 class BarHolder {
