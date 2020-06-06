@@ -19,7 +19,8 @@ class WeeklyStatistics extends StatelessWidget {
 }
 
 class StatisticsPage extends StatefulWidget {
-  @override StatisticsPageState createState() => StatisticsPageState();
+  @override
+  StatisticsPageState createState() => StatisticsPageState();
 }
 
 class StatisticsPageState extends State<StatisticsPage> {
@@ -28,7 +29,8 @@ class StatisticsPageState extends State<StatisticsPage> {
     Tab(text: "week"),
   ];
 
-  @override Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: _monthVsWeekTabs.length,
       child: Column(
@@ -43,7 +45,9 @@ class StatisticsPageState extends State<StatisticsPage> {
             child: TabBarView(
               children: _monthVsWeekTabs.map((Tab tab) {
                 final String label = tab.text.toLowerCase();
-                return label == "month" ? MonthlyStatistics() : WeeklyStatistics();
+                return label == "month"
+                    ? MonthlyStatistics()
+                    : WeeklyStatistics();
               }).toList(),
             ),
           ),

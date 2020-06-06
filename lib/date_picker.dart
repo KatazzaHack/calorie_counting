@@ -6,7 +6,8 @@ class DatePicker extends StatefulWidget {
 
   const DatePicker({Key key, this.onDateChanged}) : super(key: key);
 
-  @override DatePickerState createState() => DatePickerState();
+  @override
+  DatePickerState createState() => DatePickerState();
 }
 
 class DatePickerState extends State<DatePicker> {
@@ -28,7 +29,8 @@ class DatePickerState extends State<DatePicker> {
     });
   }
 
-  @override Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'add_product.dart';
 
 class FoodSelectionWrapper extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,12 +11,10 @@ class FoodSelectionWrapper extends StatelessWidget {
       body: Center(
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
           children: <Widget>[
-
             new RaisedButton(
               child: new Text("Add product"),
-              color:  Colors.blue,
+              color: Colors.blue,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -25,17 +22,12 @@ class FoodSelectionWrapper extends StatelessWidget {
                 );
               },
             ),
-
-
             new RaisedButton(
               child: new Text("Add dish"),
-              color:  Colors.yellow,
+              color: Colors.yellow,
               onPressed: null,
             ),
-
-
           ],
-
         ),
       ),
     );

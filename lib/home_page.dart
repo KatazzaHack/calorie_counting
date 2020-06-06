@@ -35,7 +35,8 @@ class HomePage extends StatefulWidget {
 
   const HomePage({Key key, this.onPageChanged}) : super(key: key);
 
-  @override State<StatefulWidget> createState() => HomePageState();
+  @override
+  State<StatefulWidget> createState() => HomePageState();
 }
 
 class HomePageState extends State<HomePage> {
@@ -51,11 +52,12 @@ class HomePageState extends State<HomePage> {
     widget.onPageChanged(PageType.statistics);
   }
 
-  @override Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Column(
       // Center is a layout widget. It takes a single child and positions it
       // in the middle of the parent.
-      children: <Widget> [
+      children: <Widget>[
         DatePicker(
           onDateChanged: _onDateChanged,
         ),

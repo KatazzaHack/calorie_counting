@@ -2,7 +2,6 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-
 class OutOfPieChart extends StatefulWidget {
   final int fullBar;
   final int filledBar;
@@ -10,23 +9,18 @@ class OutOfPieChart extends StatefulWidget {
   final double size;
   final String stringInside;
 
-  OutOfPieChart({
-    Key key,
-    this.filledBar,
-    this.fullBar,
-    this.infoInside,
-    this.size,
-    this.stringInside})
-      : super(key: key);
-
-  @override
-  OutOfPieChartState createState() => OutOfPieChartState(
+  OutOfPieChart(
+      {Key key,
       this.filledBar,
       this.fullBar,
       this.infoInside,
       this.size,
-      this.stringInside);
+      this.stringInside})
+      : super(key: key);
 
+  @override
+  OutOfPieChartState createState() => OutOfPieChartState(this.filledBar,
+      this.fullBar, this.infoInside, this.size, this.stringInside);
 }
 
 class OutOfPieChartState extends State<OutOfPieChart> {
@@ -36,11 +30,7 @@ class OutOfPieChartState extends State<OutOfPieChart> {
   final double size;
   final String stringInside;
 
-  OutOfPieChartState(
-      this.filledBar,
-      this.fullBar,
-      this.infoInside,
-      this.size,
+  OutOfPieChartState(this.filledBar, this.fullBar, this.infoInside, this.size,
       this.stringInside);
 
   List<charts.Series> computeSeriesList() {
@@ -52,13 +42,12 @@ class OutOfPieChartState extends State<OutOfPieChart> {
     }
     final data = [
       new BarHolder(
-          0,
-          blueArc,
-          charts.MaterialPalette.blue.shadeDefault.darker),
+          0, blueArc, charts.MaterialPalette.blue.shadeDefault.darker),
       new BarHolder(
           1,
           whiteArc,
-          charts.MaterialPalette.blue.shadeDefault.lighter.lighter.lighter.lighter),
+          charts.MaterialPalette.blue.shadeDefault.lighter.lighter.lighter
+              .lighter),
     ];
     return [
       new charts.Series<BarHolder, int>(
@@ -90,15 +79,14 @@ class OutOfPieChartState extends State<OutOfPieChart> {
         ),
         Center(
           child: Text(
-            infoInside? "$filledBar / $fullBar" : stringInside,
+            infoInside ? "$filledBar / $fullBar" : stringInside,
             style: TextStyle(
                 fontSize: infoInside ? this.size * 0.1 : offset * 2.0,
                 color: infoInside
                     ? charts.ColorUtil.toDartColor(
-                    charts.MaterialPalette.blue.shadeDefault)
+                        charts.MaterialPalette.blue.shadeDefault)
                     : Colors.black,
-                fontWeight: FontWeight.bold
-            ),
+                fontWeight: FontWeight.bold),
           ),
         )
       ],

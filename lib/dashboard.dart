@@ -10,9 +10,7 @@ class Dashboard extends StatefulWidget {
 
   @override
   DashboardState createState() => DashboardState(
-      getStateForDay(this.dateTime),
-      getNormsForDay(this.dateTime)
-  );
+      getStateForDay(this.dateTime), getNormsForDay(this.dateTime));
 }
 
 class NutritionState {
@@ -23,11 +21,7 @@ class NutritionState {
   final int calories;
 
   NutritionState(
-      this.proteins,
-      this.fats,
-      this.carbonates,
-      this.water,
-      this.calories);
+      this.proteins, this.fats, this.carbonates, this.water, this.calories);
 }
 
 NutritionState getStateForDay(DateTime dateTime) {
@@ -38,22 +32,22 @@ NutritionState getNormsForDay(DateTime dateTime) {
   return NutritionState(20, 20, 50, 1000, 1500);
 }
 
-class DashboardState extends State<Dashboard>{
+class DashboardState extends State<Dashboard> {
   final NutritionState nutritionState;
   final NutritionState nutritionNorms;
 
   DashboardState(this.nutritionState, this.nutritionNorms);
 
-  Widget buildSmallWidget(double width, double height,
-      int filledBar, int fullBar, String name) {
+  Widget buildSmallWidget(
+      double width, double height, int filledBar, int fullBar, String name) {
     int fontSize = (0.125 * height).round();
-    return Column (
-      children: <Widget> [
+    return Column(
+      children: <Widget>[
         Container(
           // color: Colors.orange,
           padding: EdgeInsets.all(0),
           width: width,
-          height:height,
+          height: height,
           child: OutOfPieChart(
             filledBar: filledBar,
             fullBar: fullBar,
@@ -73,13 +67,12 @@ class DashboardState extends State<Dashboard>{
         ),
       ],
     );
-
   }
 
   Widget buildHugeWidget(double height, int filledBar, int fullBar) {
     return Container(
       padding: EdgeInsets.all(0),
-      height:height,
+      height: height,
       child: OutOfPieChart(
         filledBar: filledBar,
         fullBar: fullBar,
@@ -90,42 +83,43 @@ class DashboardState extends State<Dashboard>{
     );
   }
 
-  @override build(BuildContext context) {
+  @override
+  build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Column(
-        children: <Widget> [
-          buildHugeWidget(
-              0.28 * height,
-              this.nutritionState.calories,
-              this.nutritionNorms.calories),
-          Row(children: <Widget>[
-            buildSmallWidget(
-              width / 4,
-              0.12 * height,
-              this.nutritionState.proteins,
-              this.nutritionNorms.proteins,
-              "P",),
-            buildSmallWidget(
-              width / 4,
-              0.12 * height,
-              this.nutritionState.fats,
-              this.nutritionNorms.fats,
-              "F",),
-            buildSmallWidget(
-              width / 4,
-              0.12 * height,
-              this.nutritionState.carbonates,
-              this.nutritionNorms.carbonates,
-              "C",),
-            buildSmallWidget(
-              width / 4,
-              0.12 * height,
-              this.nutritionState.water,
-              this.nutritionNorms.water,
-              "W",),
-          ])
-        ]
-    );
+    return Column(children: <Widget>[
+      buildHugeWidget(0.28 * height, this.nutritionState.calories,
+          this.nutritionNorms.calories),
+      Row(children: <Widget>[
+        buildSmallWidget(
+          width / 4,
+          0.12 * height,
+          this.nutritionState.proteins,
+          this.nutritionNorms.proteins,
+          "P",
+        ),
+        buildSmallWidget(
+          width / 4,
+          0.12 * height,
+          this.nutritionState.fats,
+          this.nutritionNorms.fats,
+          "F",
+        ),
+        buildSmallWidget(
+          width / 4,
+          0.12 * height,
+          this.nutritionState.carbonates,
+          this.nutritionNorms.carbonates,
+          "C",
+        ),
+        buildSmallWidget(
+          width / 4,
+          0.12 * height,
+          this.nutritionState.water,
+          this.nutritionNorms.water,
+          "W",
+        ),
+      ])
+    ]);
   }
 }
