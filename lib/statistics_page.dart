@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'date_week_picker.dart';
 import 'date_month_picker.dart';
 import 'package:logging/logging.dart';
 
@@ -25,10 +26,23 @@ class MonthlyStatistics extends StatelessWidget {
 }
 
 class WeeklyStatistics extends StatelessWidget {
+  var log = Logger("WeeklyStatistics");
+
+  void _onWeekChanged(DateTime weekStart) {
+    log.fine("_onWeekChanged, now month = " + weekStart.day.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Weekly Statistics", style: const TextStyle(fontSize: 36)),
+    return Column(
+      children: <Widget> [
+        DateWeekPicker(
+          onWeekChanged: _onWeekChanged,
+        ),
+        Center(
+          child: Text("Weekly Statistics", style: const TextStyle(fontSize: 36)),
+        ),
+      ],
     );
   }
 }
