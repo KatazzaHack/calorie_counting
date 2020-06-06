@@ -6,25 +6,31 @@ import '../gen/calorie_counting.pb.dart';
 
 NutritionState getStateForDay(DateTime dateTime) {
   if (dateTime.day == DateTime.now().day) {
-    return NutritionState(10, 20, 30, 100, 1000);
+    return NutritionState(10, 20, 30.76, 100.004, 1000.3);
   } else {
-    return NutritionState(10, 20, 30, 100, 1300);
+    return NutritionState(10.012, 20, 30, 100, 1300.345);
   }
 }
 
 Future<NutritionState> getNormsForDay(DateTime dateTime) async {
   NormsHelper normsHelper = NormsHelper();
-  Norms x =  await normsHelper.getNorm("defaultUser");
-  return Future.value(NutritionState(20, 20, 50, 1000, x.calories.round()));
+  Norms norms =  await normsHelper.getNorm("defaultUser");
+  return Future.value(
+      NutritionState(
+          norms.proteins,
+          norms.fats,
+          norms.carbonates,
+          norms.water,
+          norms.calories));
 }
 
 
 class NutritionState  {
-  final int proteins;
-  final int fats;
-  final int carbonates;
-  final int water;
-  final int calories;
+  final double proteins;
+  final double fats;
+  final double carbonates;
+  final double water;
+  final double calories;
 
   NutritionState(
       this.proteins,

@@ -37,9 +37,10 @@ class Dashboard extends StatelessWidget {
   );
   }
 
+
   Widget buildSmallWidget(
-      double width, double height, int filledBar, int fullBar, String name) {
-    int fontSize = (0.125 * height).round();
+      double width, double height, double filledBar, double fullBar,
+      String name) {
     return Column(
       children: <Widget>[
         Container(
@@ -55,7 +56,7 @@ class Dashboard extends StatelessWidget {
           ),
         ),
         Text(
-          filledBar.toString(),
+          getRounded(filledBar),
           style: TextStyle(
               height: 1.0,
               fontSize: height / 4,
@@ -67,7 +68,7 @@ class Dashboard extends StatelessWidget {
     );
   }
 
-  Widget buildCaloriesWidget(double height, int filledBar, int fullBar) {
+  Widget buildCaloriesWidget(double height, double filledBar, double fullBar) {
     return Container(
       padding: EdgeInsets.all(0),
       height: height,
