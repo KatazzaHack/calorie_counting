@@ -4,6 +4,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'out_of_pie_chart.dart';
+import 'database/util.dart';
 
 class Dashboard extends StatelessWidget {
   final log = Logger('Dashboard');
@@ -15,29 +16,25 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onDashboardTap,
-      behavior: HitTestBehavior.translucent,
-      child: IgnorePointer(
-        ignoring: true,
-        child: Container(
-          child: this.getDashboard(context),
-        ),
-      ),
-    );
-  }
-
-  NutritionState getStateForDay(DateTime dateTime) {
-    log.fine("getState for " + dateTime.day.toString());
-    if (dateTime.day == DateTime.now().day) {
-      return NutritionState(10, 20, 30, 100, 1000);
-    } else {
-      return NutritionState(10, 20, 30, 100, 1300);
-    }
-  }
-
-  NutritionState getNormsForDay(DateTime dateTime) {
-    return NutritionState(20, 20, 50, 1000, 1500);
+    return FutureBuilder<Widget>(
+      future: this.getDashboard(context),
+      builder: (context, AsyncSnapshot<Widget> snapshot) {
+        if (snapshot.hasData) {
+          return  GestureDetector(
+            onTap: onDashboardTap,
+            behavior: HitTestBehavior.translucent,
+            child: IgnorePointer(
+              ignoring: true,
+              child: Container(
+                child: snapshot.data,
+              ),
+            ),
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
+      }
+  );
   }
 
   Widget buildSmallWidget(
@@ -84,14 +81,14 @@ class Dashboard extends StatelessWidget {
     );
   }
 
-  Widget getDashboard(BuildContext context) {
+  Future<Widget> getDashboard(BuildContext context) async {
     NutritionState nutritionState;
     NutritionState nutritionNorms;
     nutritionState = getStateForDay(this.dateTime);
-    nutritionNorms = getNormsForDay(this.dateTime);
+    nutritionNorms = await getNormsForDay(this.dateTime);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Column(
+    return Future.value(Column(
         children: <Widget> [
           buildCaloriesWidget(
               0.28 * height,
@@ -124,22 +121,8 @@ class Dashboard extends StatelessWidget {
               "W",),
           ])
         ]
-    );
+    ));
   }
 }
 
 
-class NutritionState {
-  final int proteins;
-  final int fats;
-  final int carbonates;
-  final int water;
-  final int calories;
-
-  NutritionState(
-      this.proteins,
-      this.fats,
-      this.carbonates,
-      this.water,
-      this.calories);
-}
