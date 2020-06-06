@@ -65,7 +65,6 @@ class DatabaseHelper {
       List row = line.split(';');
       Product product = Product();
       product.name = row[0].toLowerCase();
-      print(product.name);
       product.protein = double.parse(row[1]);
       product.carbonates = double.parse(row[3]);
       product.calorie = double.parse(row[4]);
