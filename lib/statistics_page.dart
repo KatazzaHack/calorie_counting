@@ -1,19 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:calorie_counting/pickers/date_week_picker.dart';
+import 'package:calorie_counting/pickers/date_month_picker.dart';
+import 'package:logging/logging.dart';
 
 class MonthlyStatistics extends StatelessWidget {
+  var log = Logger("MonthlyStatistics");
+
+  void _onMonthChanged(int month) {
+    log.fine("_onMonthChanged, now month = " + month.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Monthly Statistics", style: const TextStyle(fontSize: 36)),
+    return Column(
+      children: <Widget> [
+        DateMonthPicker(
+          onMonthChanged: _onMonthChanged,
+        ),
+        Center(
+          child: Text("Monthly Statistics",
+              style: const TextStyle(fontSize: 36)),
+        ),
+      ],
     );
   }
 }
 
 class WeeklyStatistics extends StatelessWidget {
+  var log = Logger("WeeklyStatistics");
+
+  void _onWeekChanged(DateTime weekStart) {
+    log.fine("_onWeekChanged, now month = " + weekStart.day.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Weekly Statistics", style: const TextStyle(fontSize: 36)),
+    return Column(
+      children: <Widget> [
+        DateWeekPicker(
+          onWeekChanged: _onWeekChanged,
+        ),
+        Center(
+          child: Text("Weekly Statistics",
+              style: const TextStyle(fontSize: 36)),
+        ),
+      ],
     );
   }
 }

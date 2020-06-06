@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'date_picker.dart';
+import 'package:calorie_counting/pickers/date_picker.dart';
 import 'dashboard.dart';
 import 'main.dart';
 
