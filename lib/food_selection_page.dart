@@ -28,7 +28,6 @@ class FoodSelectionPage extends StatelessWidget {
               onPressed: null,
             ),
           ],
-
         ),
       ),
     );
