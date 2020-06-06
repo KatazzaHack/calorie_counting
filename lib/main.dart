@@ -5,7 +5,7 @@ import 'database/products_helper.dart';
 import 'statistics_page.dart';
 import 'food_selection_page.dart';
 
-void main() {
+void main() async {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
     print('${record.level.name}: ${record.time}: ${record.message}');
