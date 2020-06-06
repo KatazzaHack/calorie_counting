@@ -41,7 +41,6 @@ class DatabaseHelper {
     await db.execute("CREATE TABLE MealLog ( _id INTEGER PRIMARY KEY, timestamp INTEGER, data BLOB)");
     await db.execute("CREATE TABLE Dishes ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, data BLOB)");
     await _addRusCal(db);
-    await _addEngCal(db);
     await _addNorm(db);
   }
 
@@ -67,24 +66,6 @@ class DatabaseHelper {
       product.carbonates = double.parse(row[3]);
       product.calorie = double.parse(row[4]);
       product.fat = double.parse(row[2]);
-      db.insert(
-          "Products", {"name": product.name, "data": product.writeToJson()},
-          conflictAlgorithm: ConflictAlgorithm.replace);
-    });
-  }
-
-  Future _addEngCal(Database db) async {
-    return;
-    String rusCal = await rootBundle.loadString('assets/new_cal_eng.csv');
-    List data = rusCal.split('\n');
-    data.forEach((line) {
-      List row = line.split(';');
-      Product product = Product();
-      product.name = row[0].toLowerCase();
-      product.protein = double.parse(row[2]);
-      product.carbonates = double.parse(row[4]);
-      product.calorie = double.parse(row[1]);
-      product.fat = double.parse(row[3]);
       db.insert(
           "Products", {"name": product.name, "data": product.writeToJson()},
           conflictAlgorithm: ConflictAlgorithm.replace);
