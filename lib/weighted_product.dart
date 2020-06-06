@@ -16,9 +16,21 @@ class WeightedProductPageState extends State<WeightedProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Сука страница'),
+        title: Text(widget.product.name),
       ),
-      body: Text(widget.product.name),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Text(widget.product.name),
+            Row(
+              children: <Widget>[
+                Text('Калории'),
+                Text(widget.product.calorie.toString()),
+              ]
+            )
+          ]
+        )
+      )
     );
   }
 }
