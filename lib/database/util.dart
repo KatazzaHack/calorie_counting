@@ -4,12 +4,16 @@ import '../gen/calorie_counting.pb.dart';
 
 
 
-NutritionState getStateForDay(DateTime dateTime) {
+Future<NutritionState> getStateForDay(DateTime dateTime) async {
   if (dateTime.day == DateTime.now().day) {
-    return NutritionState(10, 20, 30.76, 100.004, 1000.3);
+    return Future.value(NutritionState(10, 20, 30.76, 100.004, 1000.3));
   } else {
-    return NutritionState(10.012, 20, 30, 100, 1300.345);
+    return Future.value(NutritionState(10.012, 20, 30, 100, 1300.345));
   }
+}
+
+Future<List<NutritionState>> getStateForDaySpan(DateTime dateTime, int amount) async {
+  return Future.value(new List<NutritionState>());
 }
 
 Future<NutritionState> getNormsForDay(DateTime dateTime) async {

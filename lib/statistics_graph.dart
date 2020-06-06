@@ -5,38 +5,37 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'out_of_pie_chart.dart';
 import 'database/util.dart';
+import 'dart:collection';
 
-class Dashboard extends StatelessWidget {
-  final log = Logger('Dashboard');
-  final DateTime dateTime;
-  final Function onDashboardTap;
+class WeeklyStatisticsGraph extends StatelessWidget {
+  final log = Logger('StatisticsGraph');
+  final DateTime firstDate;
+  HashMap stats;
 
-  Dashboard({Key key, this.dateTime, this.onDashboardTap})
+
+  WeeklyStatisticsGraph({Key key, this.firstDate})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Widget>(
-      future: this.getDashboard(context),
-      builder: (context, AsyncSnapshot<Widget> snapshot) {
-        if (snapshot.hasData) {
-          return  GestureDetector(
-            onTap: onDashboardTap,
-            behavior: HitTestBehavior.translucent,
-            child: IgnorePointer(
-              ignoring: true,
-              child: Container(
-                child: snapshot.data,
-              ),
-            ),
-          );
-        } else {
-          return CircularProgressIndicator();
+    return FutureBuilder<List<NutritionState>>(
+        future: getStateForDaySpan(firstDate, 7),
+        builder: (context, AsyncSnapshot<List<NutritionState>> snapshot) {
+          if (snapshot.hasData) {
+            return  Container(
+                  child: Text("qwe"),
+                );
+          } else {
+            return CircularProgressIndicator();
+          }
         }
-      }
-  );
+    );
   }
 
+//  Future<String> fetchStatistics() async {
+//    stats = new HashMap<int, int> = getStateForDaySpan(firstDate, 7);
+//    return Future.value("A");
+//  }
 
   Widget buildSmallWidget(
       double width, double height, double filledBar, double fullBar,
@@ -85,7 +84,7 @@ class Dashboard extends StatelessWidget {
   Future<Widget> getDashboard(BuildContext context) async {
     NutritionState nutritionState;
     NutritionState nutritionNorms;
-    nutritionState = await getStateForDay(this.dateTime);
+    nutritionState = getStateForDay(this.dateTime);
     nutritionNorms = await getNormsForDay(this.dateTime);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
