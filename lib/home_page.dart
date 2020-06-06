@@ -31,9 +31,9 @@ class DashboardWrapper extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  final Function onPageChanged;
+  final Function onStatisticsPageRequest;
 
-  const HomePage({Key key, this.onPageChanged}) : super(key: key);
+  const HomePage({Key key, this.onStatisticsPageRequest}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => HomePageState();
@@ -49,7 +49,7 @@ class HomePageState extends State<HomePage> {
   }
 
   void _onDashboardWrapperTapped() {
-    widget.onPageChanged(PageType.statistics);
+    widget.onStatisticsPageRequest(PageType.statistics);
   }
 
   @override

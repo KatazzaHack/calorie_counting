@@ -58,38 +58,29 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final log = Logger('_MyHomePageState');
 
-  PageType _currentPageType = PageType.home;
-
-  void _onPageChanged(PageType pageType) {
-    setState(() {
-      _currentPageType = pageType;
-    });
-    log.fine("_onPageChanged, now page = " + pageType.toString());
+  void _onStatisticsPageRequest(PageType pageType) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => StatisticsPage())
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementDate method above.
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calorie Counting'),
       ),
-      body: _currentPageType == PageType.home
-          ? HomePage(onPageChanged: _onPageChanged)
-          : StatisticsPage(),
-      floatingActionButton: Visibility(
-        child: FloatingActionButton(
+      body: HomePage(onStatisticsPageRequest: _onStatisticsPageRequest),
+      floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => FoodSelectionWrapper()),
-            );
-          },
-          tooltip: 'Add dish',
-          child: Icon(Icons.add),
-        ),
-        visible: _currentPageType == PageType.home, // set it to false
+            context,
+            MaterialPageRoute(builder: (context) => FoodSelectionPage()),
+          );
+        },
+        tooltip: 'Add dish',
+        child: Icon(Icons.add),
       ),
     );
   }
