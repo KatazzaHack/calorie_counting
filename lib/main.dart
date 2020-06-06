@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'home_page.dart';
-import 'database/ProductsHelper.dart';
+import 'database/products_helper.dart';
 import 'statistics_page.dart';
+import 'food_selection_page.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -59,14 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   PageType _currentPageType = PageType.home;
 
-  void _createDatabase() async {
-    final log = Logger('DashboardWrapper');
-    log.fine("Start creating database");
-    ProductsHelper productHelper = ProductsHelper();
-    final foo = await productHelper.searchByPrefix("ябл");
-    log.fine("Created database $foo");
-  }
-
   void _onPageChanged(PageType pageType) {
     setState(() {
       _currentPageType = pageType;
@@ -80,13 +73,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Calorie Counting'),
       ),
-      body: _currentPageType == PageType.home ?
-        HomePage(onPageChanged: _onPageChanged)
+      body: _currentPageType == PageType.home
+          ? HomePage(onPageChanged: _onPageChanged)
           : StatisticsPage(),
       floatingActionButton: Visibility(
         child: FloatingActionButton(
           onPressed: () {
-            _createDatabase();
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FoodSelectionWrapper()),
+            );
           },
           tooltip: 'Add dish',
           child: Icon(Icons.add),
