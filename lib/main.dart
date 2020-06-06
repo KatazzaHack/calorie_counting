@@ -75,19 +75,19 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Calorie Counting'),
       ),
-      body: _currentPageType == PageType.home ?
-        HomePage(onPageChanged: _onPageChanged)
+      body: _currentPageType == PageType.home
+          ? HomePage(onPageChanged: _onPageChanged)
           : StatisticsPage(),
-        floatingActionButton: Visibility(
-          child: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FoodSelectionWrapper()),
-              );
-            },
-            tooltip: 'Add dish',
-            child: Icon(Icons.add),
+      floatingActionButton: Visibility(
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FoodSelectionWrapper()),
+            );
+          },
+          tooltip: 'Add dish',
+          child: Icon(Icons.add),
         ),
         visible: _currentPageType == PageType.home, // set it to false
       ),
