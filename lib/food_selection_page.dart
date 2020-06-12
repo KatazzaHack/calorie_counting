@@ -21,7 +21,8 @@ class FoodSelectionPage extends StatelessWidget {
 }
 
 class NewMealEntityButtons extends StatelessWidget {
-  @override Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Expanded(
       child: Align(
         alignment: FractionalOffset.bottomCenter,
@@ -39,15 +40,13 @@ class NewMealEntityButtons extends StatelessWidget {
               ),
             ),
             Expanded(
-              child:
-              RaisedButton(
+              child: RaisedButton(
                 child: new Text("Add new product"),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AddNewProductPage()
-                    ),
+                        builder: (context) => AddNewProductPage()),
                   );
                 },
               ),
@@ -57,5 +56,4 @@ class NewMealEntityButtons extends StatelessWidget {
       ),
     );
   }
-
 }

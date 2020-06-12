@@ -41,19 +41,3 @@ Future<NutritionState> getNormsForDay(DateTime dateTime) async {
   NutritionState norms =  await normsHelper.getNorm("defaultUser");
   return Future.value(norms);
 }
-
-
-//class NutritionState  {
-//  final double proteins;
-//  final double fats;
-//  final double carbonates;
-//  final double water;
-//  final double calories;
-//
-//  NutritionState(
-//      this.proteins,
-//      this.fats,
-//      this.carbonates,
-//      this.water,
-//      this.calories);
-//}

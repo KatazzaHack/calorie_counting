@@ -14,14 +14,13 @@ class StatisticsGraph extends StatelessWidget {
   final DateTime firstDate;
   final int days;
 
-
   StatisticsGraph({Key key, this.firstDate, this.days})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<NutritionState>>(
-        future: getStateForDaySpan(DateTime.now(), 7),
+        future: getStateForDaySpan(firstDate, 7),
         builder: (context, AsyncSnapshot<List<NutritionState>> snapshot) {
           if (snapshot.hasData) {
             return  Container(
@@ -59,7 +58,6 @@ class StatisticsGraph extends StatelessWidget {
     );
   }
 }
-
 
 class CaloriesPerDay {
   final String date;
