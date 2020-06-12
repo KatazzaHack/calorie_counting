@@ -21,41 +21,38 @@ class FoodSelectionPage extends StatelessWidget {
 }
 
 class NewMealEntityButtons extends StatelessWidget {
-  @override Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Expanded(
       child: Align(
         alignment: FractionalOffset.bottomCenter,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Expanded(
-              child: RaisedButton(
-                child: new Text("Add new dish"),
+            FloatingActionButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => AddNewDishPage()),
                   );
                 },
-              ),
-            ),
-            Expanded(
-              child:
-              RaisedButton(
-                child: new Text("Add new product"),
+                tooltip: "Add new dish",
+                child: Icon(Icons.fastfood),
+                heroTag: null),
+            FloatingActionButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AddNewProductPage()
-                    ),
+                        builder: (context) => AddNewProductPage()),
                   );
                 },
-              ),
-            ),
+                tooltip: "Add new product",
+                child: Icon(Icons.restaurant),
+                heroTag: null),
           ],
         ),
       ),
     );
   }
-
 }
