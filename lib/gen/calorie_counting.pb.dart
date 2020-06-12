@@ -243,8 +243,8 @@ class Meal extends $pb.GeneratedMessage {
   $core.List<MealEntity> get meals => $_getList(0);
 }
 
-class Norms extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Norms', package: const $pb.PackageName('com.katazzahack.calorie_counting.protos'), createEmptyInstance: create)
+class NutritionState extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('NutritionState', package: const $pb.PackageName('com.katazzahack.calorie_counting.protos'), createEmptyInstance: create)
     ..a<$core.double>(1, 'fats', $pb.PbFieldType.OF)
     ..a<$core.double>(2, 'proteins', $pb.PbFieldType.OF)
     ..a<$core.double>(3, 'carbonates', $pb.PbFieldType.OF)
@@ -254,20 +254,20 @@ class Norms extends $pb.GeneratedMessage {
     ..hasRequiredFields = false
   ;
 
-  Norms._() : super();
-  factory Norms() => create();
-  factory Norms.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Norms.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  Norms clone() => Norms()..mergeFromMessage(this);
-  Norms copyWith(void Function(Norms) updates) => super.copyWith((message) => updates(message as Norms));
+  NutritionState._() : super();
+  factory NutritionState() => create();
+  factory NutritionState.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory NutritionState.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  NutritionState clone() => NutritionState()..mergeFromMessage(this);
+  NutritionState copyWith(void Function(NutritionState) updates) => super.copyWith((message) => updates(message as NutritionState));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static Norms create() => Norms._();
-  Norms createEmptyInstance() => create();
-  static $pb.PbList<Norms> createRepeated() => $pb.PbList<Norms>();
+  static NutritionState create() => NutritionState._();
+  NutritionState createEmptyInstance() => create();
+  static $pb.PbList<NutritionState> createRepeated() => $pb.PbList<NutritionState>();
   @$core.pragma('dart2js:noInline')
-  static Norms getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Norms>(create);
-  static Norms _defaultInstance;
+  static NutritionState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<NutritionState>(create);
+  static NutritionState _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.double get fats => $_getN(0);
