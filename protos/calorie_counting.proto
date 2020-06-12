@@ -40,8 +40,8 @@ message Meal {
   repeated MealEntity meals = 1;
 }
 
-// Store desired norms for the nutrition parameters.
-message Norms {
+// Store desired or existed nutrition state for the certain time period.
+message NutritionState {
   float fats = 1;
   float proteins = 2;
   float carbonates = 3;

@@ -45,7 +45,7 @@ class DatabaseHelper {
   }
 
   Future _addNorm(Database db) async {
-    Norms norms = Norms();
+    NutritionState norms = NutritionState();
     norms.name = "defaultUser";
     norms.carbonates = 200;
     norms.fats = 80;
