@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'out_of_pie_chart.dart';
 import 'database/util.dart';
+import 'gen/calorie_counting.pb.dart';
 
 class Dashboard extends StatelessWidget {
   final log = Logger('Dashboard');

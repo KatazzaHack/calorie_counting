@@ -7,6 +7,7 @@ import 'out_of_pie_chart.dart';
 import 'database/util.dart';
 import 'dart:collection';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'gen/calorie_counting.pb.dart';
 
 class StatisticsGraph extends StatelessWidget {
   final log = Logger('StatisticsGraph');

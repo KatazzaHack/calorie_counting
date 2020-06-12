@@ -6,9 +6,23 @@ import '../gen/calorie_counting.pb.dart';
 
 Future<NutritionState> getStateForDay(DateTime dateTime) async {
   if (dateTime.day == DateTime.now().day) {
-    return Future.value(NutritionState(10, 20, 30.76, 100.004, 1000.3));
+    NutritionState dayState = NutritionState();
+    dayState.name = "defaultUser";
+    dayState.carbonates = 10;
+    dayState.fats = 20;
+    dayState.proteins = 30.76;
+    dayState.calories = 1000.3;
+    dayState.water = 100.004;
+    return Future.value(dayState);
   } else {
-    return Future.value(NutritionState(10.012, 20, 30, 100, 1300.345));
+    NutritionState dayState = NutritionState();
+    dayState.name = "defaultUser";
+    dayState.carbonates = 10.012;
+    dayState.fats = 20;
+    dayState.proteins = 30;
+    dayState.calories = 1300.345;
+    dayState.water = 100;
+    return Future.value(dayState);
   }
 }
 
@@ -24,28 +38,22 @@ Future<List<NutritionState>> getStateForDaySpan (
 
 Future<NutritionState> getNormsForDay(DateTime dateTime) async {
   NormsHelper normsHelper = NormsHelper();
-  Norms norms =  await normsHelper.getNorm("defaultUser");
-  return Future.value(
-      NutritionState(
-          norms.proteins,
-          norms.fats,
-          norms.carbonates,
-          norms.water,
-          norms.calories));
+  NutritionState norms =  await normsHelper.getNorm("defaultUser");
+  return Future.value(norms);
 }
 
 
-class NutritionState  {
-  final double proteins;
-  final double fats;
-  final double carbonates;
-  final double water;
-  final double calories;
-
-  NutritionState(
-      this.proteins,
-      this.fats,
-      this.carbonates,
-      this.water,
-      this.calories);
-}
+//class NutritionState  {
+//  final double proteins;
+//  final double fats;
+//  final double carbonates;
+//  final double water;
+//  final double calories;
+//
+//  NutritionState(
+//      this.proteins,
+//      this.fats,
+//      this.carbonates,
+//      this.water,
+//      this.calories);
+//}
