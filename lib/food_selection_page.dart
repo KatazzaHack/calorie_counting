@@ -27,10 +27,9 @@ class NewMealEntityButtons extends StatelessWidget {
       child: Align(
         alignment: FractionalOffset.bottomCenter,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Expanded(
-              child: RaisedButton(
-                child: new Text("Add new dish"),
+            FloatingActionButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -49,8 +48,9 @@ class NewMealEntityButtons extends StatelessWidget {
                         builder: (context) => AddNewProductPage()),
                   );
                 },
-              ),
-            ),
+                tooltip: "Add new product",
+                child: Icon(Icons.restaurant),
+                heroTag: null),
           ],
         ),
       ),

@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
         tooltip: 'Add meal',
-        child: Icon(Icons.add),
+        child: Icon(Icons.restaurant_menu),
       ),
     );
   }
